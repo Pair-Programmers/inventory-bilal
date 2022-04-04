@@ -18,29 +18,32 @@
 
 <body class="white-bg" >
     <div class="ibox-content p-xl">
-        <div class="row text-center">
-            <img src="{{ asset('storage') }}/images/logo-asif.jpg" alt="logo-asif-fabric">
-        </div>
         <div class="row ">
-            <div class="col-sm-4  " >
-                M. Asif  <span style="margin-right: 240px"></span> M. Mohsin Asif <span style="margin-right: 240px"></span> M. Umar Asif
-                <br>
-            </div>
-            <div class="col-sm-4 ">
-                0300-4265624 <span style="margin-right: 197px"></span> 0323-4801929 <span style="margin-right: 245px"></span>0321-8448846
+            <img src="{{ asset('adminpanel') }}/img/logo-asif.jpg"  style="width: 150px; height: 150px;" alt="logo-asif-fabric">
+
+            <span>03224304056, 03045584205</span>
+            <span>(Adress: )</span>
+        </div>
+        <div class="row " style="display: flex; text-align: center" >
+            <div style="margin-right: 370px; margin-left: 100px">
+                BILAL SARDAR <br> 03224304056 <br> 03174146066
             </div>
 
+            <div class="">
+
+                Abdullah zubair <br>  03045584205 <br> 03077888333
+            </div>
 
         </div>
         <div class="row">
             <div class="col-sm-6 text-left">
-                <h4>Invoice No.</h4>
-                <h4 class="text-navy">S-INV-{{sprintf("%05d", $invoice->id)}}</h4>
+                <h4>Sr. No: <span>S-INV-{{sprintf("%05d", $invoice->id)}}</span></h4>
+                <h4>Invoice No: <span>_________________</span></h4>
                 <p>
                     <span><strong>Invoice Date:</strong> {{date('d-M-Y', strtotime($invoice->issue_date))}}</span><br/>
                 </p>
                 <address>
-                    Customer: <strong>{{$invoice->customer->name}}</strong><br>
+                    M/S: <strong>{{$invoice->customer->name}}</strong><br>
                     Address: <strong>{{$invoice->customer->address}}</strong><br>
                     Phone: <strong>{{$invoice->customer->phone}}</strong><br>
                 </address>
@@ -52,10 +55,9 @@
             <table class="table invoice-table">
                 <thead>
                 <tr>
+                    <th>No.</th>
                     <th>Item List</th>
-                    <th>Meter</th>
-                    <th>Ghaz</th>
-                    <th>KG</th>
+                    <th>Part No.</th>
                     <th>Quantity</th>
                     <th>Unit Price</th>
                     <th>Total Price</th>
@@ -64,13 +66,12 @@
                 <tbody>
                     @foreach ($invoice->detail as $item)
                     <tr>
+                        <td>{{$loop->count}}</td>
                         <td>
-                            <strong>{{$item->id}}</strong>
+                            <strong>{{$item->product->name}}</strong>
                         </td>
 
                         <td>{{$item->product->meter}}</td>
-                        <td>{{$item->product->ghaz}}</td>
-                        <td>{{$item->product->kg}}</td>
 
                         <td>{{$item->sale_quantity}}</td>
                         <td>{{$item->sale_price}}</td>
