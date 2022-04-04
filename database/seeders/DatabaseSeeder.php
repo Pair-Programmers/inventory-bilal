@@ -22,13 +22,16 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Admin::create(['name' => 'Hamza Saqib', 'email' => 'mianhamza7262@gmail.com', 'role' => 'Super Admin',
-        'phone' => '03231234567', 'profile_image' => 'profile_image_icon.jpg', 'password' => Hash::make('admin@123')]);
-        Admin::create(['name' => 'Hamza Shafique', 'email' => 'hamza273322@icloud.com', 'role' => 'Admin',
-        'phone' => '03231234567', 'profile_image' => 'profile_image_icon.jpg', 'password' => Hash::make('admin@123')]);
+        'phone' => '03239991999', 'profile_image' => 'profile_image_icon.jpg', 'password' => Hash::make('hamza7262')]);
+        Admin::create(['name' => 'Bilal', 'email' => 'bilalsardar41@gmail.com', 'role' => 'Super Admin',
+        'phone' => '03xxxxxxxx', 'profile_image' => 'profile_image_icon.jpg', 'password' => Hash::make('Bilal1998')]);
+        Admin::create(['name' => 'Hamza Shafique', 'email' => 'azubair210000@gmail.com', 'role' => 'Super Admin',
+        'phone' => '03xxxxxxxx', 'profile_image' => 'profile_image_icon.jpg', 'password' => Hash::make('bigbang21')]);
 
         Account::create(['name'=>'Cash Counter', 'type'=>'Cash', 'as_off_date'=>date('Y-m-d'), 'opening_balance'=>0, 'balance'=>0, 'created_by'=>1]);
         Account::create(['name'=>'Bank Account', 'type'=>'Bank', 'as_off_date'=>date('Y-m-d'), 'opening_balance'=>0, 'balance'=>0, 'created_by'=>1]);
         Customer::create(['name'=>'Cash Customer', 'type'=>'Cash', 'created_by'=>1]);
+        Vendor::create(['name'=>'Cash Vendor', 'type'=>'Cash', 'created_by'=>1]);
         ProductCategory::create(['name'=>'Mobile', 'created_by'=>1]);
         // ProductCategory::create(['name'=>'Bread', 'created_by'=>1]);
         // ProductCategory::create(['name'=>'Hot Drinks', 'created_by'=>1]);
