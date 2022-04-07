@@ -19,10 +19,10 @@
 <body class="white-bg" >
     <div class="ibox-content p-xl">
         <div class="row ">
-            <img src="{{ asset('adminpanel') }}/img/logo-asif.jpg"  style="width: 150px; height: 150px;" alt="logo-asif-fabric">
+            <img src="{{ asset('adminpanel') }}/img/sardar-sons.png"  style="width: 700px; height: 160px;" alt="logo-asif-fabric">
 
-            <span>03224304056, 03045584205</span>
-            <span>(Adress: )</span>
+            {{-- <span>03224304056, 03045584205</span>
+            <span>(Adress: Shope # 4, Rehman plaza near faisal Movers workshop Bakkar mandi )</span> --}}
         </div>
         <div class="row " style="display: flex; text-align: center" >
             <div style="margin-right: 370px; margin-left: 100px">
