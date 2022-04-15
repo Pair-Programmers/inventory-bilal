@@ -77,7 +77,7 @@
 
                         <label class="col-sm-2 control-label">Total Recieved</label>
                         <div class="col-sm-4">
-                            <label class="col-sm-2 control-label" id="totalCashRecieved">--</label>
+                            <label class="col-sm-2 control-label" id="totalCashRecieveds">{{$paymentsTotalAmount}}</label>
                         </div>
 
 

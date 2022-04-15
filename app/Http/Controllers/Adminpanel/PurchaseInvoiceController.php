@@ -94,7 +94,7 @@ class PurchaseInvoiceController extends Controller
         if($vendor->type == 'Cash'){
             $account = Account::find($request->account_id);
             Payment::create(['amount'=>intval($inputs['amount']), 'payment_date'=>$inputs['issue_date'], 'group'=>'Out', 'note'=>'Created Auto By System',
-             'type'=>'Purchase', 'invoice_id'=>$invoice->id, 'account_id'=>$account->id,  'created_by'=>Auth::guard('admin')->id()]);
+             'type'=>'Purchase', 'invoice_id'=>$invoice->id, 'vendor_id'=>$vendor->id, 'account_id'=>$account->id,  'created_by'=>Auth::guard('admin')->id()]);
             $current_balance = $account->balance;
             $account->balance = $current_balance - $inputs['amount'];
             $account->save();

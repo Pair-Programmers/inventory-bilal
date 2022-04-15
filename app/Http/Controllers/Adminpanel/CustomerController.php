@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Adminpanel;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use App\Models\Invoice;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -70,7 +71,8 @@ class CustomerController extends Controller
     {
         $customer = Customer::findOrFail($id);
         $invoices = Invoice::where('customer_id', $customer->id)->get();
-        return view('adminpanel.pages.customer_show', compact('customer', 'invoices'));
+        $paymentsTotalAmount = Payment::where('customer_id', $id)->sum('amount');
+        return view('adminpanel.pages.customer_show', compact('customer', 'invoices', 'paymentsTotalAmount'));
 
     }
 
