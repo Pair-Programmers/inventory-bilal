@@ -115,7 +115,8 @@ Route::prefix('admin')->name('admin.')->middleware('authAdmin')->group(function(
     //Payment
     Route::prefix('payment')->name('payment.')->group(function(){
         Route::get('/index', [App\Http\Controllers\Adminpanel\PaymentController::class, 'index'])->name('index');
-        Route::get('/create', [App\Http\Controllers\Adminpanel\PaymentController::class, 'create'])->name('create');
+        Route::get('/make', [App\Http\Controllers\Adminpanel\PaymentController::class, 'createMake'])->name('create.make');
+        Route::get('/recieve', [App\Http\Controllers\Adminpanel\PaymentController::class, 'createRecieve'])->name('create.recieve');
         Route::post('/store', [App\Http\Controllers\Adminpanel\PaymentController::class, 'store'])->name('store');
         Route::get('/show/{id}', [App\Http\Controllers\Adminpanel\PaymentController::class, 'show'])->name('show');
         Route::get('/edit/{id}', [App\Http\Controllers\Adminpanel\PaymentController::class, 'edit'])->name('edit');
