@@ -74,7 +74,7 @@
                             </select>
                         </div>
 
-                        <label class="col-sm-2 control-label">Openening Balance</label>
+                        <label class="col-sm-2 control-label">Opening Balance</label>
 
                         <div class="col-sm-4">
                             <div class="input-group">
