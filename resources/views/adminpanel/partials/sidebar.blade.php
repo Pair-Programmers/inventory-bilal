@@ -102,7 +102,8 @@
                     <i class="fa fa-money"></i> <span class="nav-label">Payments</span><span class="fa arrow"></span>
                 </a>
                 <ul class="nav nav-second-level collapse">
-                    <li><a href="{{ route('admin.payment.create') }}">Make Payment</a></li>
+                    <li><a href="{{ route('admin.payment.create.recieve') }}">Recieve Payment</a></li>
+                    <li><a href="{{ route('admin.payment.create.make') }}">Make Payment</a></li>
                     <li><a href="{{ route('admin.payment.index') }}">List / Report</a></li>
                 </ul>
             </li>

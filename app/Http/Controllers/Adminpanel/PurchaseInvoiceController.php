@@ -152,6 +152,15 @@ class PurchaseInvoiceController extends Controller
     {
         $invoice = Invoice::find($id);
         if($invoice){
+            $payment = Payment::where('invoice_id', $invoice->id)->first();
+            if($payment){
+                $vendor = Vendor::find($invoice->vendor_id);
+                if($vendor->type == 'Credit'){
+                    $vendor->balance = $vendor->balance - $payment->amount;
+                    $vendor->save();
+                }
+                $payment->delete();
+            }
             foreach ($invoice->detail as $key => $item) {
                 $product = Product::find($item->product_id);
                 $current_qty = $product->available_qty;

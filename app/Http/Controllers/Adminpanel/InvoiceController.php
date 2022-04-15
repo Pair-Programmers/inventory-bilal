@@ -292,6 +292,15 @@ class InvoiceController extends Controller
         $invoice = Invoice::find($id);
 
         if($invoice){
+            $payment = Payment::where('invoice_id', $invoice->id)->first();
+            if($payment){
+                $customer = Customer::find($invoice->customer_id);
+                if($customer->type == 'Credit'){
+                    $customer->balance = $customer->balance + $payment->amount;
+                    $customer->save();
+                }
+                $payment->delete();
+            }
             foreach ($invoice->detail as $key => $item) {
                 $product = Product::find($item->product_id);
                 $current_qty = $product->available_qty;
