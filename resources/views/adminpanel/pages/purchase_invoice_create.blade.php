@@ -214,7 +214,7 @@
                 var productQty = $('#quantity').val();
                 var productPurcahsePrice = $('#purchase_price').val();
                 if(productIndex){
-                    var avgPurchasePrice = (products[productIndex].cost_price + parseInt(productPurcahsePrice))/2;
+                    var avgPurchasePrice = (parseInt(products[productIndex].cost_price) + parseInt(productPurcahsePrice))/2;
                     $('#productTableBody').append(`<tr id="row-${counter}">
                                                     <td>${counter}</td>
                                                     <td>${products[productIndex].name}</td>
