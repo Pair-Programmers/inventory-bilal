@@ -1,7 +1,7 @@
 @extends('adminpanel.layout.master')
 <!-- ================================== EXTEND TITLE AND META TAGS ============================= -->
 @section('title-meta')
-<title>Inventory | Payment List</title>
+<title>Inventory | Dashboard</title>
 <meta name="description" content="this is description">
 @endsection
 <!-- ====================================== EXTRA CSS LINKS ==================================== -->
@@ -96,12 +96,16 @@
                     <td class="center">{{$payment->cnic}}</td>
 
                     <td>
+                        @if ($payment->type != 'Customer Payment' && $payment->type != 'Vendor Payment')
+                        @else
                         <a href="{{ route('admin.payment.edit', $payment->id) }}">
                             <small class="label label-primary"><i class="fa"></i>Edit</small>
                         </a>
                         <a onclick="deletePayment({{$payment->id}})">
                             <small class="label label-danger"><i class="fa"></i>Delete</small>
                         </a>
+                        @endif
+
                     </td>
                 </tr>
 
