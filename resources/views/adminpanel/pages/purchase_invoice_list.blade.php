@@ -41,7 +41,7 @@
                     <div class="form-group">
                         <label class="control-label" for="date_added">Start Date</label>
                         <div class="input-group date">
-                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input name="start_date" id="date_added" type="date" class="form-control" value="{{date('Y-m-d')}}">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input name="start_date" id="date_added" type="date" class="form-control" value="{{ old('start_date')? old('start_date') : date('Y-m-d')}}">
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                     <div class="form-group">
                         <label class="control-label" for="date_modified">End Date</label>
                         <div class="input-group date">
-                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input name="end_date" id="date_modified" type="date" class="form-control" value="{{date('Y-m-d')}}">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input name="end_date" id="date_modified" type="date" class="form-control" value="{{ old('end_date')? old('end_date') : date('Y-m-d')}}">
                         </div>
                     </div>
                 </div>

@@ -38,6 +38,7 @@ class PurchaseInvoiceController extends Controller
                 return $query->where('issue_date' , '<=', $request->end_date);
             })
             ->orderby('id', 'desc')->get();
+            $request->flash();
         return view('adminpanel.pages.purchase_invoice_list', compact('invoices'));
     }
 

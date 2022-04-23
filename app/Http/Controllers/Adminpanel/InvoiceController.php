@@ -323,7 +323,7 @@ class InvoiceController extends Controller
                 return $query->where('issue_date' , '<=', $request->end_date);
             })
             ->orderby('id', 'desc')->get();
-            $request->session()->reflash();
+            $request->flash();
         return view('adminpanel.pages.sale_invoice_list', compact('invoices'));
     }
 }
