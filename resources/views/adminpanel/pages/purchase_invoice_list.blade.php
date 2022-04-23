@@ -1,7 +1,7 @@
 @extends('adminpanel.layout.master')
 <!-- ================================== EXTEND TITLE AND META TAGS ============================= -->
 @section('title-meta')
-<title>Inventory | Purchase List</title>
+<title>Inventory | Dashboard</title>
 <meta name="description" content="this is description">
 @endsection
 <!-- ====================================== EXTRA CSS LINKS ==================================== -->
@@ -33,6 +33,49 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
 
+        <div class="ibox-content m-b-sm border-bottom">
+            <div class="row">
+                <form action="{{route('admin.purchase_invoice.search')}}" method="POST">
+                    @csrf
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label" for="date_added">Start Date</label>
+                        <div class="input-group date">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input name="start_date" id="date_added" type="date" class="form-control" value="{{date('Y-m-d')}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label class="control-label" for="date_modified">End Date</label>
+                        <div class="input-group date">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input name="end_date" id="date_modified" type="date" class="form-control" value="{{date('Y-m-d')}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label"  for="amount">_____________</label>
+                        <div class="input-group date">
+                            <button class="btn btn-primary" type="submit" >Search</button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label"  >Total Purchase</label>
+                        <div class="input-group date">
+
+                           <h2 style="color: rgb(11, 109, 189)"><strong id="total_sale"> 0 Rs</strong></h2>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+            </div>
+
+        </div>
 
         <div class="col-lg-12">
         <div class="ibox float-e-margins">
@@ -90,6 +133,9 @@
                     <td class="center">{{$invoice->createdBy->name}}</td>
 
                     <td>
+                        <a href="{{route('admin.purchase_invoice.show', $invoice->id)}}">
+                            <small class="label label-warning"><i class="fa"></i>View</small>
+                        </a>
                         {{-- <a href="{{route('admin.sale_invoice.show', $invoice->id)}}">
                             <small class="label label-primary"><i class="fa"></i>Edit</small>
                         </a> --}}
@@ -135,6 +181,13 @@
 
 <script>
     $(document).ready(function(){
+        var invoices = @json($invoices);
+        var totalSale = 0;
+        for (let i = 0; i < invoices.length; i++) {
+            totalSale += invoices[i].amount;
+        }
+        $('#total_sale').html(totalSale);
+
         $('.dataTables-example').DataTable({
             dom: '<"html5buttons"B>lTfgitp',
             buttons: [
@@ -153,25 +206,6 @@
 
         });
 
-        /* Init DataTables */
-        var oTable = $('#editable').DataTable();
-
-        /* Apply the jEditable handlers to the table */
-        oTable.$('td').editable( '../example_ajax.php', {
-            "callback": function( sValue, y ) {
-                var aPos = oTable.fnGetPosition( this );
-                oTable.fnUpdate( sValue, aPos[0], aPos[1] );
-            },
-            "submitdata": function ( value, settings ) {
-                return {
-                    "row_id": this.parentNode.getAttribute('id'),
-                    "column": oTable.fnGetPosition( this )[2]
-                };
-            },
-
-            "width": "90%",
-            "height": "100%"
-        } );
 
 
     });

@@ -137,9 +137,11 @@ Route::prefix('admin')->name('admin.')->middleware('authAdmin')->group(function(
         Route::post('/update/{id}', [App\Http\Controllers\Adminpanel\InvoiceController::class, 'update'])->name('update')->middleware('isSuperAdmin');
         Route::get('/destroy/{id}', [App\Http\Controllers\Adminpanel\InvoiceController::class, 'destroy'])->name('destroy')->middleware('isSuperAdmin');
 
+        Route::post('/search-result', [App\Http\Controllers\Adminpanel\InvoiceController::class, 'search'])->name('search');
+
     });
 
-    //Sale Invoice
+    //Purchase Invoice
     Route::prefix('purchase_invoice')->name('purchase_invoice.')->group(function(){
 
         Route::get('/index', [App\Http\Controllers\Adminpanel\PurchaseInvoiceController::class, 'index'])->name('index');
@@ -149,6 +151,8 @@ Route::prefix('admin')->name('admin.')->middleware('authAdmin')->group(function(
         Route::get('/edit/{id}', [App\Http\Controllers\Adminpanel\PurchaseInvoiceController::class, 'edit'])->name('edit');
         Route::post('/update/{id}', [App\Http\Controllers\Adminpanel\PurchaseInvoiceController::class, 'update'])->name('update')->middleware('isSuperAdmin');
         Route::get('/destroy/{id}', [App\Http\Controllers\Adminpanel\PurchaseInvoiceController::class, 'destroy'])->name('destroy')->middleware('isSuperAdmin');
+
+        Route::post('/search-result', [App\Http\Controllers\Adminpanel\PurchaseInvoiceController::class, 'search'])->name('search');
 
     });
 

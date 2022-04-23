@@ -116,7 +116,7 @@ class InvoiceController extends Controller
         else{
             if($inputs['cash_recieved'] > 0){
                 Payment::create(['amount'=>intval($inputs['cash_recieved']), 'payment_date'=>date('Y-m-d'), 'group'=>'In', 'note'=>'Recieved in Credit Invoice # '. $invoice->id,
-             'type'=>'Sale', 'invoice_id'=>$invoice->id, 'customer_id'=>$customer->id,  'account_id'=>1,  'created_by'=>Auth::guard('admin')->id()]);
+             'type'=>'Sale', 'invoice_id'=>$invoice->id, 'customer_id'=>$customer->id, 'account_id'=>1,  'created_by'=>Auth::guard('admin')->id()]);
             }
         }
 
@@ -296,7 +296,7 @@ class InvoiceController extends Controller
             if($payment){
                 $customer = Customer::find($invoice->customer_id);
                 if($customer->type == 'Credit'){
-                    $customer->balance = $customer->balance + $payment->amount;
+                    $customer->balance = $customer->balance - $payment->amount;
                     $customer->save();
                 }
                 $payment->delete();
@@ -310,5 +310,20 @@ class InvoiceController extends Controller
             return response()->json(['success'=>'invoice deleted successfully !']);
         }
         return response()->json(['error'=>'invoice not found !']);
+    }
+
+    public function search(Request $request)
+    {
+        $invoices = Invoice::where('type', 'Sale')
+            ->when($request->filled('start_date') , function ($query) use ($request){
+                return $query->where('issue_date' , '>=', $request->start_date);
+
+            })
+            ->when($request->filled('end_date') , function ($query) use ($request){
+                return $query->where('issue_date' , '<=', $request->end_date);
+            })
+            ->orderby('id', 'desc')->get();
+            $request->session()->reflash();
+        return view('adminpanel.pages.sale_invoice_list', compact('invoices'));
     }
 }

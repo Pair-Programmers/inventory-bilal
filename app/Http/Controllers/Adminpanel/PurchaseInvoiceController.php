@@ -27,6 +27,20 @@ class PurchaseInvoiceController extends Controller
         return view('adminpanel.pages.purchase_invoice_list', compact('invoices'));
     }
 
+    public function search(Request $request)
+    {
+        $invoices = Invoice::where('type', 'Purchase')
+            ->when($request->filled('start_date') , function ($query) use ($request){
+                return $query->where('issue_date' , '>=', $request->start_date);
+
+            })
+            ->when($request->filled('end_date') , function ($query) use ($request){
+                return $query->where('issue_date' , '<=', $request->end_date);
+            })
+            ->orderby('id', 'desc')->get();
+        return view('adminpanel.pages.purchase_invoice_list', compact('invoices'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -114,7 +128,8 @@ class PurchaseInvoiceController extends Controller
      */
     public function show($id)
     {
-        //
+        $invoice =  Invoice::with('detail')->find($id);
+        return view('adminpanel.pages.purchase_invoice_show', compact('invoice'));
     }
 
     /**

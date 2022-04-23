@@ -312,8 +312,9 @@
         });
 
         $('#customerSelect').on('change',function(e){
-            console.log($(this).val());
-            preBalance = customers[$(this).val()-1].balance;
+            // console.log($(this).prop('selectedIndex'));
+            // console.log(customers[$(this).prop('selectedIndex')-1]);
+            preBalance = customers[$(this).prop('selectedIndex')-1].balance;
             calculateTotalAmmount();
         });
 
