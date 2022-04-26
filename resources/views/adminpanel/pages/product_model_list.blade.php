@@ -33,7 +33,7 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="ibox-content">
-            <form method="post" class="form-horizontal" action="{{route('admin.product.category.store')}}" enctype="multipart/form-data">
+            <form method="post" class="form-horizontal" action="{{route('admin.product.model.store')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Model Name</label>
@@ -97,15 +97,15 @@
                                     $counter = 1;
                                 @endphp
 
-                                @foreach ($categories as $category)
-                                    <tr class="gradeX d-none" id="row-{{$category->id}}">
+                                @foreach ($models as $model)
+                                    <tr class="gradeX d-none" id="row-{{$model->id}}">
                                         <td>{{ $counter }}</td>
-                                        <td class="center">{{ $category->name }}</td>
+                                        <td class="center">{{ $model->name }}</td>
                                         <td>
-                                            <a href="{{route('admin.product.category.edit', $category->id)}}">
+                                            <a href="{{route('admin.product.model.edit', $model->id)}}">
                                                 <small class="label label-warning"><i class="fa"></i>Edit</small>
                                             </a>
-                                            <a onclick="deleteProductCategory({{$category->id}})">
+                                            <a onclick="deleteProductmodel({{$model->id}})">
                                                 <small class="label label-danger"><i class="fa"></i>Delete</small>
                                             </a>
 
@@ -197,7 +197,7 @@
     }
 </script>
 <script>
-    function deleteProductCategory(id) {
+    function deleteProductmodel(id) {
     swal({
 
         title: "You really want to delete ？", // You really want to delete ?
@@ -214,7 +214,7 @@
         if (isConfirm) {
             $.ajax({
                 method: 'GET',
-                url: "{{ route('admin.product.category.destroy', '') }}/" + id,
+                url: "{{ route('admin.product.model.destroy', '') }}/" + id,
                 success: function(response) {
                     console.log(response);
                     if(response.success){

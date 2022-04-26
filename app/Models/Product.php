@@ -21,6 +21,7 @@ class Product extends Model
         'description',
         'brand',
         'product_category_id',
+        'product_model_id',
         'product_subcategory_id',
         'created_by',
         'meter',

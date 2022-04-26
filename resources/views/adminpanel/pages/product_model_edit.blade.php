@@ -31,13 +31,13 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="ibox-content">
-            <form method="post" class="form-horizontal" action="{{route('admin.product.category.update', $category->id)}}" enctype="multipart/form-data">
+            <form method="post" class="form-horizontal" action="{{route('admin.product.model.update', $model->id)}}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Model Name</label>
 
                     <div class="col-sm-4">
-                            <input type="text" class="form-control" name="name" required  value="{{$category->name}}">
+                            <input type="text" class="form-control" name="name" required  value="{{$model->name}}">
 
                     </div>
 

@@ -47,6 +47,7 @@
                     <li><a href="{{ route('admin.product.create') }}">Create</a></li>
                     <li><a href="{{ route('admin.product.index') }}">List / Report</a></li>
                     <li><a href="{{ route('admin.product.category.index') }}">Manage Category</a></li>
+                    <li><a href="{{ route('admin.product.model.index') }}">Manage Model</a></li>
                 </ul>
             </li>
 

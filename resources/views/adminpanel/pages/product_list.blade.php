@@ -70,6 +70,7 @@ der-bottom white-bg page-heading">
                                         <th>No.</th>
                                         <th>ID/Code</th>
                                         <th>Name</th>
+                                        <th>Model</th>
                                         <th>Category</th>
                                         <th>Cost Price</th>
                                         <th>Sale Price</th>
@@ -88,6 +89,7 @@ der-bottom white-bg page-heading">
                                             <td>{{ $counter }}</td>
                                             <td class="center">{{ sprintf('%04d', $product->id) }}</td>
                                             <td class="center">{{ $product->name }}</td>
+                                            <td class="center">{{ $product->model->name }}</td>
                                             <td class="center">{{ $product->category->name }}</td>
                                             <td class="center">{{ $product->cost_price }}</td>
                                             <td class="center">{{ $product->sale_price }}</td>
@@ -118,6 +120,7 @@ der-bottom white-bg page-heading">
                                         <th>No.</th>
                                         <th>ID/Code</th>
                                         <th>Name</th>
+                                        <th>Model</th>
                                         <th>Category</th>
                                         <th>Cost Price</th>
                                         <th>Sale Price</th>
