@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Adminpanel;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
-use App\Models\Customer;
 use App\Models\Employee;
+use App\Models\Customer;
+use App\Models\Vendor;
 use App\Models\Expense;
 use App\Models\Payment;
-use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,11 +25,6 @@ class PaymentController extends Controller
         return view('adminpanel.pages.payment_list', compact('payments'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function createMake()
     {
         $employees = Employee::all();
@@ -212,5 +207,20 @@ class PaymentController extends Controller
             return response()->json(['success' => 'Expense deleted successfully !']);
         }
         return response()->json(['error' => 'Expense not found !']);
+    }
+
+    public function search(Request $request)
+    {
+        $payments = Payment::
+            when($request->filled('start_date') , function ($query) use ($request){
+                return $query->where('payment_date' , '>=', $request->start_date);
+
+            })
+            ->when($request->filled('end_date') , function ($query) use ($request){
+                return $query->where('payment_date' , '<=', $request->end_date);
+            })
+            ->orderby('id', 'desc')->get();
+            $request->flash();
+        return view('adminpanel.pages.payment_list', compact('payments'));
     }
 }

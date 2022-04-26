@@ -85,6 +85,22 @@
 
                     </div>
 
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Model</label>
+
+                        <div class="col-sm-4">
+                            <select class="form-control" name="product_model_id" required>
+                                <option selected disabled>Select</option>
+                                @foreach ($models as $model)
+
+                                    <option value="{{ $model->id }}">{{ $model->name }} </option>
+                                @endforeach
+
+                            </select>
+                        </div>
+
+
+                    </div>
 
 
                     <div class="form-group">

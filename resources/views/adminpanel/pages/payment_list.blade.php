@@ -33,6 +33,69 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
 
+    <div class="ibox-content m-b-sm border-bottom">
+            <div class="row">
+                <form action="{{route('admin.payment.search')}}" method="POST">
+                    @csrf
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label class="control-label" for="date_added">Start Date</label>
+                        <div class="input-group date">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input name="start_date" id="date_added" type="date" class="form-control" value="{{ old('start_date')? old('start_date') : date('Y-m-d')}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label class="control-label" for="date_modified">End Date</label>
+                        <div class="input-group date">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input name="end_date" id="date_modified" type="date" class="form-control" value="{{ old('end_date')? old('end_date') : date('Y-m-d')}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label"  for="amount">_____________</label>
+                        <div class="input-group date">
+                            <button class="btn btn-primary" type="submit" >Search</button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label"  >Total Payment <span style="color: green" >In</span></label>
+                        <div class="input-group date">
+
+                           <h2 style="color: rgb(11, 109, 189)"><strong id="total_payment_in"> 0 Rs</strong></h2>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label class="control-label"  >Total Payment <span style="color: red"> Out</span></label>
+                        <div class="input-group date">
+
+                           <h2 style="color: rgb(11, 109, 189)"><strong id="total_payment_out"> 0 Rs</strong></h2>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label class="control-label"  >= In - Out</label>
+                        <div class="input-group date">
+
+                           <h2 style="color: rgb(11, 109, 189)"><strong id="total_in_out"> 0 Rs</strong></h2>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+            </div>
+
+        </div>
 
         <div class="col-lg-12">
         <div class="ibox float-e-margins">
@@ -82,7 +145,13 @@
                     <td>{{$counter}}</td>
                     <td class="center">{{$payment->payment_date}}</td>
                     <td class="center">{{$payment->amount}}</td>
-                    <td class="center">{{$payment->group}}</td>
+
+                    @if ($payment->group == 'In')
+                    <td class="center" style="color: green">{{$payment->group}}</td>
+                    @else
+                    <td class="center" style="color: red">{{$payment->group}}</td>
+                    @endif
+
                     <td class="center">{{$payment->type}}</td>
                     <td class="center">{{$payment->note}}</td>
                     @if ($payment->type == 'Sale Invoice')
@@ -91,6 +160,7 @@
                     @elseif ($payment->type == 'Expense')
                     @elseif ($payment->type == 'Employee Salary')
                     @elseif ($payment->type == 'Sale Invoice')
+
                     @else
                     @endif
                     <td class="center">{{$payment->cnic}}</td>
@@ -144,6 +214,22 @@
 
 <script>
     $(document).ready(function(){
+
+        var payments = @json($payments);
+        var totalPaymentIn = 0;
+        var totalPaymentOut = 0;
+        for (let i = 0; i < payments.length; i++) {
+            if(payments[i].group == 'In'){
+                totalPaymentIn += payments[i].amount;
+            }
+            else if(payments[i].group == 'Out'){
+                totalPaymentOut += payments[i].amount;
+            }
+        }
+        $('#total_payment_in').html(totalPaymentIn);
+        $('#total_payment_out').html(totalPaymentOut);
+        $('#total_in_out').html(totalPaymentIn-totalPaymentOut);
+
         $('.dataTables-example').DataTable({
             dom: '<"html5buttons"B>lTfgitp',
             buttons: [

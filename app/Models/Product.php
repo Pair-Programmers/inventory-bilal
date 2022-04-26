@@ -33,6 +33,11 @@ class Product extends Model
         return $this->hasOne(ProductCategory::class, 'id', 'product_category_id');
     }
 
+    public function model()
+    {
+        return $this->hasOne(ProductModel::class, 'id', 'product_model_id');
+    }
+
     public function creator()
     {
         return $this->hasOne(Admin::class, 'id', 'created_by');

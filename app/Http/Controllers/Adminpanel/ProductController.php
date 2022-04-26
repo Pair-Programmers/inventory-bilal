@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\InvoiceDetail;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\ProductModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,7 +31,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = ProductCategory::all();
-        return view('adminpanel.pages.product_create', compact('categories'));
+        $models = ProductModel::all();
+        return view('adminpanel.pages.product_create', compact('categories', 'models'));
 
     }
 
@@ -88,7 +90,8 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $categories = ProductCategory::all();
-        return view('adminpanel.pages.product_edit', compact('product', 'categories'));
+        $models = ProductModel::all();
+        return view('adminpanel.pages.product_edit', compact('product', 'categories', 'models'));
     }
 
     /**

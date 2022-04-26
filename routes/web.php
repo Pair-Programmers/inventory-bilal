@@ -66,6 +66,16 @@ Route::prefix('admin')->name('admin.')->middleware('authAdmin')->group(function(
             Route::get('/destroy/{id}', [App\Http\Controllers\Adminpanel\ProductCategoryController::class, 'destroy'])->name('destroy')->middleware('isSuperAdmin');
         });
 
+        Route::prefix('model')->name('model.')->group(function(){
+            Route::get('/index', [App\Http\Controllers\Adminpanel\ProductModelController::class, 'index'])->name('index');
+            Route::get('/create', [App\Http\Controllers\Adminpanel\ProductModelController::class, 'create'])->name('create');
+            Route::post('/store', [App\Http\Controllers\Adminpanel\ProductModelController::class, 'store'])->name('store');
+            Route::get('/show/{id}', [App\Http\Controllers\Adminpanel\ProductModelController::class, 'show'])->name('show');
+            Route::get('/edit/{id}', [App\Http\Controllers\Adminpanel\ProductModelController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}', [App\Http\Controllers\Adminpanel\ProductModelController::class, 'update'])->name('update')->middleware('isSuperAdmin');
+            Route::get('/destroy/{id}', [App\Http\Controllers\Adminpanel\ProductModelController::class, 'destroy'])->name('destroy')->middleware('isSuperAdmin');
+        });
+
         Route::get('/index', [App\Http\Controllers\Adminpanel\ProductController::class, 'index'])->name('index');
         Route::get('/create', [App\Http\Controllers\Adminpanel\ProductController::class, 'create'])->name('create');
         Route::post('/store', [App\Http\Controllers\Adminpanel\ProductController::class, 'store'])->name('store');
@@ -123,6 +133,7 @@ Route::prefix('admin')->name('admin.')->middleware('authAdmin')->group(function(
         Route::post('/update/{id}', [App\Http\Controllers\Adminpanel\PaymentController::class, 'update'])->name('update')->middleware('isSuperAdmin');
         Route::get('/destroy/{id}', [App\Http\Controllers\Adminpanel\PaymentController::class, 'destroy'])->name('destroy')->middleware('isSuperAdmin');
 
+        Route::post('/search-result', [App\Http\Controllers\Adminpanel\PaymentController::class, 'search'])->name('search');
     });
 
     //Sale Invoice
