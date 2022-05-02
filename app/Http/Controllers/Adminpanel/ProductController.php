@@ -19,7 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('category', 'creator')->orderby('id', 'desc')->get();
+        $products = Product::with('category', 'creator', 'model')->orderby('id', 'desc')->get();
         return view('adminpanel.pages.product_list', compact('products'));
     }
 
@@ -45,7 +45,9 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'code' => 'required|string|unique:products,code',
             'product_category_id' => 'required',
+            'product_model_id' => 'required',
             'name'=> 'required',
         ]);
 
@@ -103,6 +105,13 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'code' => 'required|string|unique:products,code,'.$id,
+            'product_category_id' => 'required',
+            'product_model_id' => 'required',
+            'name'=> 'required',
+        ]);
+
         $product = Product::find($id);
         $data[] = null;
         $inputs = $request->all();

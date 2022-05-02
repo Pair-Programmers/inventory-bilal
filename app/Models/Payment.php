@@ -21,4 +21,9 @@ class Payment extends Model
         'account_id',
         'created_by',
     ];
+
+    public function creator()
+    {
+        return $this->hasOne(Admin::class, 'id', 'created_by');
+    }
 }

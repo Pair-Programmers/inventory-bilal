@@ -89,26 +89,7 @@
 
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Account</label>
-
-                        <div class="col-sm-4">
-                            <select class="form-control" name="account_id" required>
-                                {{-- <option selected disabled>Select</option> --}}
-                                @foreach ($accounts as $account)
-                                    @if ($expense->account_id == $account->id)
-                                    <option selected value="{{ $account->id }}">{{ $account->name }} </option>
-                                @endif
-                                <option value="{{ $account->id }}">{{ $account->name }} </option>
-
-                                @endforeach
-
-                            </select>
-                        </div>
-
-
-
-                    </div>
+                    
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Note</label>

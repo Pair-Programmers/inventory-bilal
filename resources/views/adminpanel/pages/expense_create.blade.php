@@ -86,23 +86,8 @@
 
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Account</label>
-
-                        <div class="col-sm-4">
-                            <select class="form-control" name="account_id" required>
-                                {{-- <option selected disabled>Select</option> --}}
-                                @foreach ($accounts as $account)
-
-                                    <option value="{{ $account->id }}">{{ $account->name }} </option>
-                                @endforeach
-
-                            </select>
-                        </div>
-
-
-
-                    </div>
+                    
+                    <input type="hidden" name="account_id" id="1" value="1">
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Note</label>

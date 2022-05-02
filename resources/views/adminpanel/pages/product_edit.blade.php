@@ -36,6 +36,20 @@
                 <form method="post" class="form-horizontal" action="{{ route('admin.product.update', $product->id) }}"
                     enctype="multipart/form-data">
                     @csrf
+
+                    <div class="form-group @error('code') has-error @enderror">
+
+                        <label class="col-sm-2 control-label">Unique Code</label>
+
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" name="code" required value="{{$product->code}}">
+                        </div>
+                        @error('code')
+                            <span class="help-block m-b-none">{{$message}}</span>
+                        @enderror
+
+                    </div>
+
                     <div class="form-group">
 
                         <label class="col-sm-2 control-label">Name</label>
@@ -57,7 +71,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Category</label>
 
-                        <div class="col-sm-4">
+                        <div class="col-sm-4 @error('product_category_id') has-error @enderror">
                             <select class="form-control" name="product_category_id" required>
                                 <option selected disabled>Select</option>
                                 @foreach ($categories as $category)
@@ -69,6 +83,9 @@
                                 @endforeach
 
                             </select>
+                            @error('product_category_id')
+                                <span class="help-block m-b-none">Select Category</span>
+                            @enderror
                         </div>
 
                         <label class="col-sm-2 control-label">Opening Qty</label>
@@ -83,7 +100,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Model</label>
 
-                        <div class="col-sm-4">
+                        <div class="col-sm-4 @error('product_model_id') has-error @enderror">
                             <select class="form-control" name="product_model_id" required>
                                 <option selected disabled>Select</option>
                                 @foreach ($models as $model)
@@ -95,6 +112,9 @@
                                 @endforeach
 
                             </select>
+                            @error('product_model_id')
+                                <span class="help-block m-b-none">Select Model</span>
+                            @enderror
                         </div>
 
 

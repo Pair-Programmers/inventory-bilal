@@ -75,7 +75,7 @@ der-bottom white-bg page-heading">
                                         <th>Cost Price</th>
                                         <th>Sale Price</th>
                                         <th>Qty</th>
-                                        <th>Brand</th>
+                                        <th>Created By</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -87,14 +87,15 @@ der-bottom white-bg page-heading">
                                     @foreach ($products as $product)
                                         <tr class="gradeX" id="row-{{ $product->id }}">
                                             <td>{{ $counter }}</td>
-                                            <td class="center">{{ sprintf('%04d', $product->id) }}</td>
+                                            {{-- <td class="center">{{ sprintf('%04d', $product->id) }}</td> --}}
+                                            <td class="center">{{ $product->code }}</td>
                                             <td class="center">{{ $product->name }}</td>
                                             <td class="center">{{ $product->model->name }}</td>
                                             <td class="center">{{ $product->category->name }}</td>
                                             <td class="center">{{ $product->cost_price }}</td>
                                             <td class="center">{{ $product->sale_price }}</td>
                                             <td class="center">{{ $product->available_qty }}</td>
-                                            <td class="center">{{ $product->brand }}</td>
+                                            <td class="center">{{ $product->creator->name }}</td>
 
                                             <td>
                                                 <a href="{{ route('admin.product.edit', $product->id) }}">
@@ -125,7 +126,7 @@ der-bottom white-bg page-heading">
                                         <th>Cost Price</th>
                                         <th>Sale Price</th>
                                         <th>Qty</th>
-                                        <th>Brand</th>
+                                        <th>Created By</th>
                                         <th>Action</th>
                                     </tr>
                                 </tfoot>

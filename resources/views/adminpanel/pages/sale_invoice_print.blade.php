@@ -56,7 +56,9 @@
                 <thead>
                 <tr>
                     <th>No.</th>
+                    <th>Code</th>
                     <th>Item List</th>
+                    <th>Model</th>
                     <th>Part No.</th>
                     <th>Quantity</th>
                     <th>Unit Price</th>
@@ -67,10 +69,12 @@
                     @foreach ($invoice->detail as $item)
                     <tr>
                         <td>{{$loop->count}}</td>
+                        <td>{{$item->product->code}}</td>
                         <td>
                             <strong>{{$item->product->name}}</strong>
                         </td>
 
+                        <td>{{$item->product->model->name}}</td>
                         <td>{{$item->product->meter}}</td>
 
                         <td>{{$item->sale_quantity}}</td>

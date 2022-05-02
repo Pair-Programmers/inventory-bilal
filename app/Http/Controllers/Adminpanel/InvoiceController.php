@@ -36,7 +36,7 @@ class InvoiceController extends Controller
     {
         $accounts = Account::all();
         $customers = Customer::all();
-        $products = Product::with('category', 'creator')->orderby('id', 'desc')->get();
+        $products = Product::with('category', 'creator', 'model')->orderby('id', 'desc')->get();
         return view('adminpanel.pages.sale_invoice_create', compact('products', 'customers', 'accounts'));
 
     }

@@ -60,7 +60,9 @@
                                 <table class="table invoice-table">
                                     <thead>
                                     <tr>
+                                        <th>Code</th>
                                         <th>Item List</th>
+                                        <th>Model</th>
                                         <th>Quantity</th>
                                         <th>Unit Price</th>
                                         <th>Total Price</th>
@@ -69,10 +71,12 @@
                                     <tbody>
                                         @foreach ($invoice->detail as $item)
                                         <tr>
+                                            <td>{{$item->product->code}}</td>
                                             <td>
                                                 <strong>{{$item->product->name}}</strong>
                                             </td>
 
+                                            <td>{{$item->product->model->name}}</td>
                                             <td>{{$item->sale_quantity}}</td>
                                             <td>{{$item->sale_price}}</td>
                                             <td>{{$item->total_ammount}}</td>

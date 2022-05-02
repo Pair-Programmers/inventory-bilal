@@ -131,7 +131,7 @@
                 <th>Transaction</th>
                 <th>Type</th>
                 <th>Note</th>
-                <th>Ref #</th>
+                <th>Created By</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -163,8 +163,7 @@
 
                     @else
                     @endif
-                    <td class="center">{{$payment->cnic}}</td>
-
+                    <td>{{$payment->creator->name}}</td>
                     <td>
                         @if ($payment->type != 'Customer Payment' && $payment->type != 'Vendor Payment')
                         @else
@@ -177,6 +176,7 @@
                         @endif
 
                     </td>
+
                 </tr>
 
                 @php
@@ -194,7 +194,7 @@
                 <th>Transaction</th>
                 <th>Type</th>
                 <th>Note</th>
-                <th>Ref #</th>
+                <th>Created By</th>
                 <th>Action</th>
             </tr>
             </tfoot>

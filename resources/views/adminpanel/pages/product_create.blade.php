@@ -29,12 +29,12 @@
         </div>
     </div>
 
-    @error('product_category_id')
+    {{-- @error('product_category_id')
         <div class="alert alert-danger" style="margin-top: 20px">Please Select Category</div>
     @enderror
     @error('name')
         <div class="alert alert-danger" style="margin-top: 20px">Please Enter Name</div>
-    @enderror
+    @enderror --}}
 
 
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -44,12 +44,26 @@
                 <form method="post" class="form-horizontal" action="{{ route('admin.product.store') }}"
                     enctype="multipart/form-data">
                     @csrf
+
+                    <div class="form-group @error('code') has-error @enderror">
+
+                        <label class="col-sm-2 control-label">Unique Code</label>
+
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" name="code" required value="{{old('code')}}">
+                        </div>
+                        @error('code')
+                            <span class="help-block m-b-none">{{$message}}</span>
+                        @enderror
+
+                    </div>
+
                     <div class="form-group">
 
                         <label class="col-sm-2 control-label">Name</label>
 
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" name="name" required>
+                            <input type="text" class="form-control" name="name" required value="{{old('name')}}">
 
                         </div>
 
@@ -65,7 +79,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Category</label>
 
-                        <div class="col-sm-4">
+                        <div class="col-sm-4 @error('product_category_id') has-error @enderror">
                             <select class="form-control" name="product_category_id" required>
                                 <option selected disabled>Select</option>
                                 @foreach ($categories as $category)
@@ -74,12 +88,15 @@
                                 @endforeach
 
                             </select>
+                            @error('product_category_id')
+                                <span class="help-block m-b-none">Select Category</span>
+                            @enderror
                         </div>
 
                         <label class="col-sm-2 control-label">Opening Qty</label>
 
                         <div class="col-sm-4">
-                            <input type="number" min="0" class="form-control" name="opening_qty" value="0" required>
+                            <input type="number" min="0" class="form-control" name="opening_qty" value="{{old('opening_qty')}}" value="0" required>
                         </div>
 
 
@@ -88,7 +105,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Model</label>
 
-                        <div class="col-sm-4">
+                        <div class="col-sm-4 @error('product_model_id') has-error @enderror">
                             <select class="form-control" name="product_model_id" required>
                                 <option selected disabled>Select</option>
                                 @foreach ($models as $model)
@@ -97,6 +114,9 @@
                                 @endforeach
 
                             </select>
+                            @error('product_model_id')
+                                <span class="help-block m-b-none">Select Model</span>
+                            @enderror
                         </div>
 
 
@@ -107,13 +127,13 @@
                         <label class="col-sm-2 control-label">Cost Price</label>
 
                         <div class="col-sm-4">
-                            <input type="number" min="0" class="form-control" name="cost_price" required>
+                            <input type="number" min="0" class="form-control" value="{{old('cost_price')}}" name="cost_price" required>
                         </div>
 
                         <label class="col-sm-2 control-label">Sale Price</label>
 
                         <div class="col-sm-4">
-                            <input type="number" min="0" class="form-control" name="sale_price" required>
+                            <input type="number" min="0" class="form-control" value="{{old('sale_price')}}" name="sale_price" required>
                         </div>
 
                     </div>
@@ -122,13 +142,13 @@
                         <label class="col-sm-2 control-label">Brand</label>
 
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" name="brand">
+                            <input type="text" class="form-control" value="{{old('brand')}}" name="brand">
                         </div>
 
                         <label class="col-sm-2 control-label">Colors</label>
 
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" name="colors">
+                            <input type="text" class="form-control" value="{{old('colors')}}" name="colors">
                         </div>
 
 
@@ -137,7 +157,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Note</label>
                         <div class="col-sm-4">
-                            <textarea name="description" id="" cols="50" rows="5"></textarea>
+                            <textarea name="description" id="" cols="50" rows="5">{{old('description')}}</textarea>
                         </div>
 
                     </div>

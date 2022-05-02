@@ -65,8 +65,9 @@
                 <th>No.</th>
                 <th>Date</th>
                 <th>Amount</th>
-                <th>Account</th>
+                {{-- <th>Account</th> --}}
                 <th>Category</th>
+                <th>Created By</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -80,8 +81,9 @@
                     <td>{{$counter}}</td>
                     <td class="center">{{date('d-m-Y', strtotime($expense->expense_date))}}</td>
                     <td class="center">{{$expense->amount}}</td>
-                    <td class="center">{{$expense->account->name}}</td>
+                    {{-- <td class="center">{{$expense->account->name}}</td> --}}
                     <td class="center">{{$expense->category->name}}</td>
+                    <td class="center">{{$expense->creator->name}}</td>
 
                     <td>
                         <a href="{{ route('admin.expense.edit', $expense->id) }}">
@@ -105,8 +107,9 @@
                 <th>No.</th>
                 <th>Date</th>
                 <th>Amount</th>
-                <th>Account</th>
+                {{-- <th>Account</th> --}}
                 <th>Category</th>
+                <th>Created By</th>
                 <th>Action</th>
             </tr>
             </tfoot>
