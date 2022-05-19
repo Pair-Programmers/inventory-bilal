@@ -96,7 +96,7 @@
                         <label class="col-sm-2 control-label">Opening Qty</label>
 
                         <div class="col-sm-4">
-                            <input type="number" min="0" class="form-control" name="opening_qty" value="{{old('opening_qty')}}" value="0" required>
+                            <input type="number" min="0" class="form-control" name="opening_qty" value="{{old('opening_qty') ? old('opening_qty') : 0}}" value="0" required>
                         </div>
 
 
@@ -127,13 +127,13 @@
                         <label class="col-sm-2 control-label">Cost Price</label>
 
                         <div class="col-sm-4">
-                            <input type="number" min="0" class="form-control" value="{{old('cost_price')}}" name="cost_price" required>
+                            <input type="number" min="0"  class="form-control" value="{{old('cost_price') ? old('cost_price') : 0 }}" name="cost_price" required>
                         </div>
 
                         <label class="col-sm-2 control-label">Sale Price</label>
 
                         <div class="col-sm-4">
-                            <input type="number" min="0" class="form-control" value="{{old('sale_price')}}" name="sale_price" required>
+                            <input type="number" min="0" class="form-control" value="{{old('sale_price') ? old('sale_price') : 0}}" name="sale_price" required>
                         </div>
 
                     </div>
