@@ -245,6 +245,8 @@
 
 
         $(".touchspin1").TouchSpin({
+            min: 1,
+            max: 999999999,
             buttondown_class: 'btn btn-white',
             buttonup_class: 'btn btn-white'
         });
