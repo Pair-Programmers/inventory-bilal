@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Adminpanel;
 
 use App\Http\Controllers\Controller;
+use App\Models\Invoice;
+use App\Models\Payment;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,7 +45,7 @@ class VendorController extends Controller
             'type' => 'required',
             'name'=> 'required',
         ]);
-        
+
         $inputs = $request->all();
 
         if($request->hasfile('profile_image'))
@@ -67,7 +69,10 @@ class VendorController extends Controller
      */
     public function show($id)
     {
-        //
+        $vendor = Vendor::findOrFail($id);
+        $invoices = Invoice::where('vendor_id', $vendor->id)->get();
+        $paymentsTotalAmount = Payment::where('vendor_id', $id)->sum('amount');
+        return view('adminpanel.pages.vendor_show', compact('vendor', 'invoices', 'paymentsTotalAmount'));
     }
 
     /**

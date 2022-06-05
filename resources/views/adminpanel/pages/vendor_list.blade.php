@@ -88,6 +88,9 @@
                     {{-- <td class="center">{{$vendor->address}}</td> --}}
 
                     <td>
+                        <a href="{{ route('admin.vendor.show', $vendor->id) }}">
+                            <small class="label label-warning"><i class="fa"></i>View</small>
+                        </a>
                         <a href="{{ route('admin.vendor.edit', $vendor->id) }}">
                             <small class="label label-primary"><i class="fa"></i>Edit</small>
                         </a>
