@@ -220,15 +220,15 @@
         var totalPaymentOut = 0;
         for (let i = 0; i < payments.length; i++) {
             if(payments[i].group == 'In'){
-                totalPaymentIn += payments[i].amount;
+                totalPaymentIn = parseInt(totalPaymentIn) + parseInt(payments[i].amount);
             }
             else if(payments[i].group == 'Out'){
-                totalPaymentOut += payments[i].amount;
+                totalPaymentOut = parseInt(totalPaymentOut) + parseInt(payments[i].amount);
             }
         }
         $('#total_payment_in').html(totalPaymentIn);
         $('#total_payment_out').html(totalPaymentOut);
-        $('#total_in_out').html(totalPaymentIn-totalPaymentOut);
+        $('#total_in_out').html(parseInt(totalPaymentIn) - parseInt(totalPaymentOut));
 
         $('.dataTables-example').DataTable({
             dom: '<"html5buttons"B>lTfgitp',
