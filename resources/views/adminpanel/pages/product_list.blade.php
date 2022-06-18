@@ -99,12 +99,10 @@ der-bottom white-bg page-heading">
 
                                             <td>
                                                 <a href="{{ route('admin.product.edit', $product->id) }}">
-                                                    <small class="label label-primary"><i
-                                                            class="fa"></i>Edit</small>
+                                                    <small class="label label-primary"><i class="fa"></i>Edit</small>
                                                 </a>
                                                 <a onclick="deleteProduct({{ $product->id }})">
-                                                    <small class="label label-danger"><i
-                                                            class="fa"></i>Delete</small>
+                                                    <small class="label label-danger"><i class="fa"></i>Delete</small>
                                                 </a>
                                             </td>
                                         </tr>

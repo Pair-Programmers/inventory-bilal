@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Adminpanel;
 
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
+use App\Models\InvoiceDetail;
 use App\Models\Payment;
+use App\Models\Product;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class VendorController extends Controller
 {
@@ -72,7 +75,16 @@ class VendorController extends Controller
         $vendor = Vendor::findOrFail($id);
         $invoices = Invoice::where('vendor_id', $vendor->id)->get();
         $paymentsTotalAmount = Payment::where('vendor_id', $id)->sum('amount');
-        return view('adminpanel.pages.vendor_show', compact('vendor', 'invoices', 'paymentsTotalAmount'));
+        $products = Product::join('invoice_details', 'invoice_details.product_id', 'products.id')
+        ->join('invoices', 'invoices.id', 'invoice_details.invoice_id')
+        ->select('products.*', DB::raw('sum(products.id) as total_purchased'))
+        ->where('invoices.vendor_id', $id)
+        ->groupBy('products.id')
+        ->get();
+        foreach ($products as $key => $product) {
+            $product['total_sold'] = InvoiceDetail::where('product_id', $product->id)->sum('sale_quantity');
+        }
+        return view('adminpanel.pages.vendor_show', compact('vendor', 'invoices', 'paymentsTotalAmount', 'products'));
     }
 
     /**

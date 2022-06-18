@@ -109,6 +109,21 @@
                                     </div>
 
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Vendor</label>
+
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <select required data-placeholder="Choose a Country..." class="chosen-select"
+                                                tabindex="2" style="width:350px;" id="vendorSelect" name="vendor_id">
+                                                @foreach ($vendors as $vendor)
+                                                    <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Qty</label>
@@ -141,6 +156,7 @@
                                                 <th>Price</th>
                                                 <th>Qty</th>
                                                 <th>Amount</th>
+                                                <th>Vendor</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -223,8 +239,8 @@
 
     <script>
         var products = @json($products);
+        var vendors = @json($vendors);
         var customers = @json($customers);
-        console.log(products);
         var counter = 1;
         var grossTotal = 0;
         var discount = 0;
@@ -232,7 +248,8 @@
         var preBalance = 0;
         function addProduct() {
             if($('#quantity').val()){
-                var productIndex = $('#productSelect').val();
+                var productIndex = $('#productSelect').prop('selectedIndex')-1;
+                var vendorIndex = $('#vendorSelect').prop('selectedIndex');
                 var productName = $('#productSelect').find(":selected").text();
                 var productQty = $('#quantity').val();
                 var productSalePrice = $('#sale_price').val();
@@ -244,6 +261,7 @@
                                                     <td>${productSalePrice}</td>
                                                     <td>${productQty}</td>
                                                     <td>${productQty*productSalePrice}</td>
+                                                    <td>${vendors[vendorIndex].name}</td>
                                                     <td>
                                                         <a onclick="deleteProduct(${counter})">
                                                             <small class="label label-danger"><i class="fa"></i>delete</small>
@@ -252,15 +270,19 @@
 
                                                     <input type="hidden" name="product_id[]" value="${products[productIndex].id}">
                                                     <input type="hidden" name="product_qty[]" value="${productQty}">
+                                                    <input type="hidden" name="vendor_id[]" value="${vendors[vendorIndex].id}">
                                                     <input type="hidden" name="product_sale_price[]" value="${productSalePrice}">
                                                 </tr>`);
                     counter++;
 
                 }
                 calculateTotalAmmount();
+
             }
 
         }
+
+
 
         function deleteProduct(rowId){
             $("#row-" + rowId).remove();
@@ -281,7 +303,6 @@
             function myFunction(product_id, index, arr) {
                 products.every(element => {
                     if(element.id == parseInt(product_id)){
-                        console.log(element);
                         tottalAmount = tottalAmount + (parseInt(products_qty_in_cart[index]) * parseInt(products_salePrice_in_cart[index]));
                         return false;
 
@@ -320,10 +341,28 @@
             calculateTotalAmmount();
         });
 
+        function updateVendors(productId){
+            $('#vendorSelect').empty();
+            console.log(productId);
+            vendors.forEach(vendor => {
+                vendor.purchased_products.forEach(product => {
+                    if(product.product_id == productId){
+                        console.log('------------');
+                        console.log(vendor);
+                        var optionHtml = `<option value="${vendor.id}">${vendor.name}</option>`;
+                        $('#vendorSelect').append(optionHtml);
+                    }
+                });
+            });
+        }
+
         $('#productSelect').on('change',function(e){
-            var productSalePrice = products[$(this).val()].sale_price;
+            var productIndex = $('#productSelect').prop('selectedIndex');
+            var productSalePrice = products[productIndex-1].sale_price;
             $('#sale_price').val(productSalePrice);
         });
+
+
 
     </script>
 

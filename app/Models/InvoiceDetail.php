@@ -16,6 +16,7 @@ class InvoiceDetail extends Model
         'sale_price',
         'total_ammount',
         'invoice_id',
+        'vendor_id',
     ];
 
     public function product()

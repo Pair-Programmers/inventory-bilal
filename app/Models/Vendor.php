@@ -22,4 +22,9 @@ class Vendor extends Model
         'opening_balance',
         'created_by',
     ];
+
+    public function purchasedProducts()
+    {
+        return $this->hasManyThrough(InvoiceDetail::class, Invoice::class);
+    }
 }

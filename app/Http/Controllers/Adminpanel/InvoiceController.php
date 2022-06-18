@@ -9,6 +9,7 @@ use App\Models\Invoice;
 use App\Models\InvoiceDetail;
 use App\Models\Payment;
 use App\Models\Product;
+use App\Models\Vendor;
 use charlieuki\ReceiptPrinter\ReceiptPrinter as ReceiptPrinter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,8 +37,9 @@ class InvoiceController extends Controller
     {
         $accounts = Account::all();
         $customers = Customer::all();
+        $vendors = Vendor::with('purchasedProducts')->get();
         $products = Product::with('category', 'creator', 'model')->orderby('id', 'desc')->get();
-        return view('adminpanel.pages.sale_invoice_create', compact('products', 'customers', 'accounts'));
+        return view('adminpanel.pages.sale_invoice_create', compact('products', 'customers', 'accounts', 'vendors'));
 
     }
 
@@ -52,6 +54,7 @@ class InvoiceController extends Controller
         $request->validate([
             'customer_id'=> 'required',
             'product_id'=> 'required',
+            'vendor_id'=> 'required',
         ]);
 
         $items = [];
@@ -86,8 +89,10 @@ class InvoiceController extends Controller
         $product_ids = $inputs['product_id'];
         $product_qtys = $inputs['product_qty'];
         $product_sale_price = $inputs['product_sale_price'];
+        $vendor_ids = $inputs['vendor_id'];
 
         unset($inputs['product_id']);
+        unset($inputs['vendor_id']);
         unset($inputs['product_qty']);
         unset($inputs['product_sale_price']);
 
@@ -99,7 +104,8 @@ class InvoiceController extends Controller
                              'purchase_price'=>$product->cost_price,
                              'sale_price'=>$product_sale_price[$i],
                              'total_ammount'=>$product_sale_price[$i] * $product_qtys[$i],
-                             'invoice_id'=>$invoice->id]);
+                             'invoice_id'=>$invoice->id,
+                             'vendor_id'=>$vendor_ids[$i]]);
             $product->available_qty = $product->available_qty - $product_qtys[$i];
             $product->save();
             array_push($items, ['name'=>$product->name, 'qty'=>$product_qtys[$i], 'price'=>$product_sale_price[$i]]);
