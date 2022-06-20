@@ -209,7 +209,7 @@
         var discount = 0;
         function addProduct() {
             if($('#quantity').val()){
-                var productIndex = $('#productSelect').val();
+                var productIndex = $('#productSelect').prop('selectedIndex')-1;
                 var productName = $('#productSelect').find(":selected").text();
                 var productQty = $('#quantity').val();
                 var productPurcahsePrice = $('#purchase_price').val();
