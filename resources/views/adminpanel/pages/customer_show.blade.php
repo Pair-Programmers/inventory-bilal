@@ -12,16 +12,16 @@
 @section('content')
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2 >List of Sale Invoices</h2>
+        <h2 >Customer Show</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="index.html">Home</a>
             </li>
             <li>
-                <a>Sale Invoices</a>
+                <a>Customer</a>
             </li>
             <li class="active">
-                <strong> List</strong>
+                <strong> Show</strong>
             </li>
         </ol>
     </div>
@@ -267,7 +267,7 @@
         var invoices = @json($invoices);
         var totalSale = 0;
         for (let i = 0; i < invoices.length; i++) {
-            totalSale += invoices[i].amount;
+            totalSale = parseInt(totalSale) + parseInt(invoices[i].amount);
         }
         $('#total_sale').html(totalSale);
 
