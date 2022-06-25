@@ -77,13 +77,14 @@ class VendorController extends Controller
         $paymentsTotalAmount = Payment::where('vendor_id', $id)->sum('amount');
         $products = Product::join('invoice_details', 'invoice_details.product_id', 'products.id')
         ->join('invoices', 'invoices.id', 'invoice_details.invoice_id')
-        ->select('products.*', DB::raw('sum(products.id) as total_purchased'))
+        ->select('products.*', DB::raw('sum(invoice_details.sale_quantity) as total_purchased'))
         ->where('invoices.vendor_id', $id)
         ->groupBy('products.id')
         ->get();
         foreach ($products as $key => $product) {
-            $product['total_sold'] = InvoiceDetail::where('product_id', $product->id)->sum('sale_quantity');
+            $product['total_sold'] = InvoiceDetail::where('vendor_id', $id)->where('product_id', $product->id)->sum('sale_quantity');
         }
+        //return $products;
         return view('adminpanel.pages.vendor_show', compact('vendor', 'invoices', 'paymentsTotalAmount', 'products'));
     }
 
