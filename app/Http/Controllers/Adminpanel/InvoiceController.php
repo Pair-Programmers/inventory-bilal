@@ -194,6 +194,7 @@ class InvoiceController extends Controller
     public function show($id)
     {
         $invoice =  Invoice::with('detail')->find($id);
+        return $invoice->detail[0]->product;
         return view('adminpanel.pages.sale_invoice_show', compact('invoice'));
     }
 
