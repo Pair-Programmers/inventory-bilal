@@ -184,7 +184,7 @@
         var invoices = @json($invoices);
         var totalSale = 0;
         for (let i = 0; i < invoices.length; i++) {
-            totalSale += invoices[i].amount;
+            totalSale = parseInt(totalSale) +  parseInt(invoices[i].amount);
         }
         $('#total_sale').html(totalSale);
 
