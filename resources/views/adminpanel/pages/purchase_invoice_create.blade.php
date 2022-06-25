@@ -210,10 +210,11 @@
         function addProduct() {
             if($('#quantity').val()){
                 var productIndex = $('#productSelect').prop('selectedIndex')-1;
+                console.log(productIndex);
                 var productName = $('#productSelect').find(":selected").text();
                 var productQty = $('#quantity').val();
                 var productPurcahsePrice = $('#purchase_price').val();
-                if(productIndex){
+                if(productIndex >= 0){
                     var avgPurchasePrice = (parseInt(products[productIndex].cost_price) + parseInt(productPurcahsePrice))/2;
                     $('#productTableBody').append(`<tr id="row-${counter}">
                                                     <td>${counter}</td>

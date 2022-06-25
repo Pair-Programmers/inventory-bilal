@@ -253,7 +253,7 @@
                 var productName = $('#productSelect').find(":selected").text();
                 var productQty = $('#quantity').val();
                 var productSalePrice = $('#sale_price').val();
-                if(productIndex){
+                if(productIndex >= 0){
                     $('#productTableBody').append(`<tr id="row-${counter}">
                                                     <td>${counter}</td>
                                                     <td>${products[productIndex].name}</td>
