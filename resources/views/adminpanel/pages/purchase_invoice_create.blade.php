@@ -185,6 +185,16 @@
 
                                 </div>
 
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Cash Paid</label>
+
+                                    <div class="col-sm-2">
+                                        <input type="number" class="form-control " id="cashPaidAmount" name="cash_paid" value="0">
+                                    </div>
+
+
+                                </div>
+
 
 
                                 <button class="btn btn-primary" type="submit" name="button" value="Save">Save Invoice</button>

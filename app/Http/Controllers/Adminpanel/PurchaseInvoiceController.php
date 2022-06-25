@@ -83,6 +83,13 @@ class PurchaseInvoiceController extends Controller
         }
         else{
             $inputs['group'] = 'Credit';
+            $preBalance = $vendor->balance;
+            if($inputs['cash_paid'] > 0){
+                $vendor->balance = $preBalance + intval($inputs['amount']) - intval($inputs['cash_paid']);
+            }
+            else{
+                $vendor->balance = $preBalance + intval($inputs['amount']);
+            }
         }
         $inputs['created_by'] = Auth::guard('admin')->id();
         $inputs['amount'] = intval($inputs['amount']);
@@ -113,6 +120,12 @@ class PurchaseInvoiceController extends Controller
             $current_balance = $account->balance;
             $account->balance = $current_balance - $inputs['amount'];
             $account->save();
+        }
+        else{
+            if($inputs['cash_paid'] > 0){
+                Payment::create(['amount'=>intval($inputs['cash_paid']), 'payment_date'=>date('Y-m-d'), 'group'=>'Out', 'note'=>'Paid in Credit Invoice # '. $invoice->id,
+             'type'=>'Purchase', 'invoice_id'=>$invoice->id, 'vendor_id'=>$vendor->id, 'account_id'=>1,  'created_by'=>Auth::guard('admin')->id()]);
+            }
         }
 
         if($request->button == 'Save & Print'){

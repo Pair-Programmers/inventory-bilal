@@ -38,13 +38,13 @@
                 <form method="post" class="form-horizontal" action="" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Name</label>
-                        <div class="col-sm-4">
+                        <label class="col-sm-1 control-label">Name</label>
+                        <div class="col-sm-3">
                             <input type="text" class="form-control" name="name" disabled value="{{ $vendor->name }}"
                                 required>
                         </div>
 
-                        <label class="col-sm-2 control-label">Total Amount</label>
+                        <label class="col-sm-2 control-label">Total Purchase</label>
                         <div class="col-sm-4">
                             <label class="col-sm-2 control-label" id="totalAmount">--</label>
                         </div>
@@ -52,8 +52,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Email</label>
-                        <div class="col-sm-4">
+                        <label class="col-sm-1 control-label">Email</label>
+                        <div class="col-sm-3">
                             <input type="email" class="form-control" name="email" disabled
                                 value="{{ $vendor->email }}" placeholder="Optional">
                         </div>
@@ -67,9 +67,9 @@
 
                     <div class="form-group">
 
-                        <label class="col-sm-2 control-label">Type</label>
+                        <label class="col-sm-1 control-label">Type</label>
 
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <select class="form-control" name="type" disabled required>
                                 <option selected disabled>Select</option>
                                 <option value="Cash" @if ($vendor->type == 'Cash') selected @endif>Cash Based</option>
@@ -78,7 +78,7 @@
                             </select>
                         </div>
 
-                        <label class="col-sm-2 control-label">Total Recieved</label>
+                        <label class="col-sm-2 control-label">Total Paid</label>
                         <div class="col-sm-4">
                             <label class="col-sm-2 control-label"
                                 id="totalCashRecieveds">{{ $paymentsTotalAmount }}</label>
@@ -93,16 +93,17 @@
 
                     <div class="form-group">
 
-                        <label class="col-sm-2 control-label">Adress</label>
+                        <label class="col-sm-1 control-label">Adress</label>
 
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" disabled name="address"
-                                value="{{ $vendor->address }}" placeholder="Optional">
+                        <div class="col-sm-3">
+                            <textarea name="" id="" cols="35" rows="3" disabled>{{ $vendor->address }}
+                            </textarea>
+
                         </div>
 
-                        <label class="col-sm-2 control-label">Balance</label>
+                        <label class="col-sm-2 control-label">Payable</label>
                         <div class="col-sm-4">
-                            <label class="col-sm-2 control-label">{{ $vendor->balance }}</label>
+                            <label class="col-sm-2 control-label" id="payable">0</label>
                         </div>
                     </div>
 
@@ -199,7 +200,7 @@
                                         <th>Amount</th>
                                         <th># Items</th>
                                         <th>Discount</th>
-                                        <th>Cash Recieved</th>
+                                        <th>Cash Paid</th>
                                         <th>Ref #</th>
                                         <th>Created by</th>
                                         <th>Action</th>
@@ -250,7 +251,7 @@
                                         <th>Amount</th>
                                         <th># Items</th>
                                         <th>Discount</th>
-                                        <th>Cash Recieved</th>
+                                        <th>Cash Paid</th>
                                         <th>Ref #</th>
                                         <th>Created by</th>
                                         <th>Action</th>
@@ -404,6 +405,7 @@
             $('#totalAmount').html(parseInt(totalAmount));
             $('#totalDiscount').html(parseInt(totalDiscount));
             $('#totalCashRecieved').html(parseInt(totalCashRecieved));
+            $('#payable').html(parseInt(totalAmount - totalCashRecieved));
 
 
         });
