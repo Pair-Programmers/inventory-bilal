@@ -84,12 +84,14 @@ class PurchaseInvoiceController extends Controller
         else{
             $inputs['group'] = 'Credit';
             $preBalance = $vendor->balance;
+            $inputs['pre_balance'] = $vendor->balance;
             if($inputs['cash_paid'] > 0){
                 $vendor->balance = $preBalance + intval($inputs['amount']) - intval($inputs['cash_paid']);
             }
             else{
                 $vendor->balance = $preBalance + intval($inputs['amount']);
             }
+            $vendor->save();
         }
         $inputs['created_by'] = Auth::guard('admin')->id();
         $inputs['amount'] = intval($inputs['amount']);

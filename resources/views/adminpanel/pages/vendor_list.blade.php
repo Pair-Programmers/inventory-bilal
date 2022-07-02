@@ -67,7 +67,7 @@
                 <th>Phone</th>
                 <th>Email</th>
                 <th>Type</th>
-                <th>Balance</th>
+                <th>Payable</th>
                 {{-- <th>Adress</th> --}}
                 <th>Action</th>
             </tr>
@@ -114,7 +114,7 @@
                 <th>Phone</th>
                 <th>Email</th>
                 <th>Type</th>
-                <th>Balance</th>
+                <th>Payable</th>
                 {{-- <th>Adress</th> --}}
                 <th>Action</th>
             </tr>

@@ -111,6 +111,7 @@
                 <th># Items</th>
                 <th>Customer</th>
                 <th>Discount</th>
+                <th>Pre Balance</th>
                 <th>Cash Recieved</th>
                 <th>Created by</th>
                 <th>Action</th>
@@ -130,6 +131,7 @@
                     <td class="center">{{$invoice->no_of_items}}</td>
                     <td class="center">{{$invoice->customer->name}}</td>
                     <td class="center">{{$invoice->discount}}</td>
+                    <td class="center">{{$invoice->pre_balance}}</td>
                     <td class="center">{{$invoice->cash_recieved}}</td>
                     <td class="center">{{$invoice->createdBy->name}}</td>
 
@@ -162,6 +164,7 @@
                 <th># Items</th>
                 <th>Customer</th>
                 <th>Discount</th>
+                <th>Pre Balance</th>
                 <th>Cash Recieved</th>
                 <th>Created by</th>
                 <th>Action</th>
@@ -188,7 +191,7 @@
         for (let i = 0; i < invoices.length; i++) {
             totalSale = parseInt(totalSale) + parseInt(invoices[i].amount);
         }
-        $('#total_sale').html(totalSale); 
+        $('#total_sale').html(totalSale);
 
         $('.dataTables-example').DataTable({
             dom: '<"html5buttons"B>lTfgitp',

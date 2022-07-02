@@ -112,6 +112,7 @@
                 <th># Items</th>
                 <th>Vendor</th>
                 <th>Discount</th>
+                <th>Pre Balance</th>
                 <th>Created by</th>
                 <th>Action</th>
             </tr>
@@ -130,6 +131,7 @@
                     <td class="center">{{$invoice->no_of_items}}</td>
                     <td class="center">{{$invoice->vendor->name}}</td>
                     <td class="center">{{$invoice->discount}}</td>
+                    <td class="center">{{$invoice->pre_balance}}</td>
                     <td class="center">{{$invoice->createdBy->name}}</td>
 
                     <td>
@@ -161,6 +163,7 @@
                 <th># Items</th>
                 <th>Vendor</th>
                 <th>Discount</th>
+                <th>Pre Balance</th>
                 <th>Created by</th>
                 <th>Action</th>
             </tr>

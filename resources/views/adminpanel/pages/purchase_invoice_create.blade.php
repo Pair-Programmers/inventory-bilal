@@ -61,7 +61,7 @@
                                     <div class="col-sm-4">
                                         <div class="input-group">
                                             <select required data-placeholder="Choose a Country..." class="chosen-select"
-                                                tabindex="2" style="width:350px;" id="customerSelect" name="vendor_id">
+                                                tabindex="2" style="width:350px;" id="vendorSelect" name="vendor_id">
                                                 <option value="">Select Vendor</option>
                                                 @foreach ($vendors as $vendor)
                                                     <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
@@ -154,6 +154,7 @@
                                 </div>
 
                                 <div class="ibox-content">
+                                    <h1 >Pre Balance: <strong id="preBalance">0</strong> Rs.</h1>
                                     <h1 >Gross Total: <strong id="grossTotalAmmount">0</strong> Rs.</h1>
                                     <h1 >Discount: <strong id="discountAmmount">0</strong> Rs.</h1>
                                     <h1 >Total: <strong id="totalAmmount">0</strong> Rs.</h1>
@@ -213,10 +214,11 @@
 
     <script>
         var products = @json($products);
-        console.log(products);
+        var vendors = @json($vendors);
         var counter = 1;
         var grossTotal = 0;
         var discount = 0;
+        var preBalance = 0;
         function addProduct() {
             if($('#quantity').val()){
                 var productIndex = $('#productSelect').prop('selectedIndex')-1;
@@ -280,9 +282,10 @@
                 });
             }
             grossTotal = tottalAmount;
+            $('#preBalance').html(preBalance);
             $('#grossTotalAmmount').html(grossTotal);
             $('#discountAmmount').html(discount);
-            $('#totalAmmount').html( (grossTotal-discount));
+            $('#totalAmmount').html( parseInt(grossTotal-discount) + parseInt(preBalance));
             $('#ammount').val(grossTotal-discount);
         }
         $('#discount').on('input',function(e){
@@ -292,6 +295,13 @@
 
         $('#productSelect').on('change', function() {
             $('#purchase_price').attr("placeholder", "Old Cost : " + products[$('#productSelect').val()].cost_price);
+        });
+
+        $('#vendorSelect').on('change',function(e){
+            // console.log($(this).prop('selectedIndex'));
+            // console.log(customers[$(this).prop('selectedIndex')-1]);
+            preBalance = vendors[$(this).prop('selectedIndex')-1].balance;
+            calculateTotalAmmount();
         });
 
     </script>

@@ -366,6 +366,8 @@
     <script>
         $(document).ready(function() {
             var invoices = @json($invoices);
+            var preBalance = @json($vendor->balance);
+            console.log(preBalance);
             var totalSale = 0;
             for (let i = 0; i < invoices.length; i++) {
                 totalSale = parseInt(totalSale) + parseInt(invoices[i].amount);
@@ -405,7 +407,7 @@
             $('#totalAmount').html(parseInt(totalAmount));
             $('#totalDiscount').html(parseInt(totalDiscount));
             $('#totalCashRecieved').html(parseInt(totalCashRecieved));
-            $('#payable').html(parseInt(totalAmount - totalCashRecieved));
+            $('#payable').html(parseInt(preBalance + totalAmount - totalCashRecieved));
 
 
         });
