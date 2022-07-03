@@ -201,6 +201,7 @@
                                         <th># Items</th>
                                         <th>Discount</th>
                                         <th>Cash Paid</th>
+                                        <th>Pre Balance</th>
                                         <th>Ref #</th>
                                         <th>Created by</th>
                                         <th>Action</th>
@@ -220,6 +221,7 @@
                                             <td class="center">{{ $invoice->no_of_items }}</td>
                                             <td class="center">{{ $invoice->discount }}</td>
                                             <td class="center">{{ $invoice->cash_recieved }}</td>
+                                            <td class="center">{{ $invoice->pre_balance }}</td>
                                             <td class="center">{{ $invoice->reference_no }}</td>
                                             <td class="center">{{ $invoice->createdBy->name }}</td>
 
@@ -253,6 +255,7 @@
                                         <th>Discount</th>
                                         <th>Cash Paid</th>
                                         <th>Ref #</th>
+                                        <th>Pre Balance</th>
                                         <th>Created by</th>
                                         <th>Action</th>
                                     </tr>
