@@ -103,7 +103,7 @@
 
                         <label class="col-sm-2 control-label">Payable</label>
                         <div class="col-sm-4">
-                            <label class="col-sm-2 control-label" id="payable">0</label>
+                            <label class="col-sm-2 control-label" id="payable">{{$vendor->balance}}</label>
                         </div>
                     </div>
 
@@ -413,7 +413,7 @@
             $('#totalAmount').html(parseInt(totalAmount));
             $('#totalDiscount').html(parseInt(totalDiscount));
             // $('#totalCashRecieved').html(parseInt(totalCashRecieved));
-            $('#payable').html(parseInt(preBalance));
+            // $('#payable').html(parseInt(preBalance));
 
 
         });
