@@ -17,6 +17,8 @@ class Payment extends Model
         'note',
         'invoice_id',
         'expense_id',
+        'vendor_id',
+        'customer_id',
         'employee_id',
         'account_id',
         'created_by',
