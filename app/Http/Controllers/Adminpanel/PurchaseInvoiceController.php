@@ -70,7 +70,7 @@ class PurchaseInvoiceController extends Controller
         ]);
         $vendor = Vendor::find($request->vendor_id);
         $inputs = $request->all();
-        $inputs['cash_paid'] = $inputs['cash_recieved'];
+        $inputs['cash_recieved'] = $inputs['cash_paid'];
         $no_of_items = 0;
         foreach ($inputs['product_qty'] as $key => $value) {
             $no_of_items = $no_of_items + $value;
