@@ -407,7 +407,7 @@
             $('#totalAmount').html(parseInt(totalAmount));
             $('#totalDiscount').html(parseInt(totalDiscount));
             $('#totalCashRecieved').html(parseInt(totalCashRecieved));
-            $('#payable').html(parseInt(preBalance + totalAmount - totalCashRecieved));
+            $('#payable').html(parseInt(preBalance) + parseInt(totalAmount) - parseInt(totalCashRecieved));
 
 
         });
