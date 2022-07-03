@@ -69,7 +69,7 @@ class PaymentController extends Controller
         else{
             $inputs['type'] = 'Vendor Payment';
             $vendor = Vendor::find($inputs['vendor_id']);
-            $vendor->balance = $vendor->balance + $inputs['amount'];
+            $vendor->balance = $vendor->balance - $inputs['amount'];
             $vendor->save();
         }
 
