@@ -199,10 +199,11 @@
                                         <th>Date</th>
                                         <th>Amount</th>
                                         <th># Items</th>
+                                        <th>Vendor</th>
                                         <th>Discount</th>
-                                        <th>Cash Paid</th>
                                         <th>Pre Balance</th>
-                                        <th>Ref #</th>
+                                        <th>Cash Paid</th>
+                                        <th>Debit</th>
                                         <th>Created by</th>
                                         <th>Action</th>
                                     </tr>
@@ -217,13 +218,14 @@
                                             <td>{{ $counter }}</td>
                                             <td class="center">{{ sprintf('%05d', $invoice->id) }}</td>
                                             <td class="center">{{ date('d-M-Y', strtotime($invoice->issue_date)) }}</td>
-                                            <td class="center">{{ $invoice->amount }}</td>
-                                            <td class="center">{{ $invoice->no_of_items }}</td>
-                                            <td class="center">{{ $invoice->discount }}</td>
-                                            <td class="center">{{ $invoice->cash_recieved }}</td>
-                                            <td class="center">{{ $invoice->pre_balance }}</td>
-                                            <td class="center">{{ $invoice->reference_no }}</td>
-                                            <td class="center">{{ $invoice->createdBy->name }}</td>
+                                            <td class="center">{{$invoice->amount}}</td>
+                                            <td class="center">{{$invoice->no_of_items}}</td>
+                                            <td class="center">{{$invoice->vendor->name}}</td>
+                                            <td class="center">{{$invoice->discount}}</td>
+                                            <td class="center">{{$invoice->pre_balance}}</td>
+                                            <td class="center">{{$invoice->cash_recieved}}</td>
+                                            <td class="center">{{$invoice->amount - $invoice->cash_recieved}}</td>
+                                            <td class="center">{{$invoice->createdBy->name}}</td>
 
                                             <td>
                                                 <a href="{{ route('admin.purchase_invoice.show', $invoice->id) }}">
@@ -252,10 +254,11 @@
                                         <th>Date</th>
                                         <th>Amount</th>
                                         <th># Items</th>
+                                        <th>Vendor</th>
                                         <th>Discount</th>
-                                        <th>Cash Paid</th>
-                                        <th>Ref #</th>
                                         <th>Pre Balance</th>
+                                        <th>Cash Paid</th>
+                                        <th>Debit</th>
                                         <th>Created by</th>
                                         <th>Action</th>
                                     </tr>
@@ -409,8 +412,8 @@
             //console.log(totalAmount);
             $('#totalAmount').html(parseInt(totalAmount));
             $('#totalDiscount').html(parseInt(totalDiscount));
-            $('#totalCashRecieved').html(parseInt(totalCashRecieved));
-            $('#payable').html(parseInt(preBalance) + parseInt(totalAmount) - parseInt(totalCashRecieved));
+            // $('#totalCashRecieved').html(parseInt(totalCashRecieved));
+            $('#payable').html(parseInt(preBalance));
 
 
         });
