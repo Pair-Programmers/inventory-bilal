@@ -40,16 +40,36 @@
                         <label class="col-sm-2 control-label">Customer</label>
 
                         <div class="col-sm-4">
-                            <select class="form-control" name="customer_id" required>
-                                <option selected disabled value=""  >Select</option>
-                                @foreach ($customers as $customer)
-                                    <option value="{{ $customer->id }}">{{ $customer->name }} </option>
-                                @endforeach
-                            </select>
+
+                            <div class="input-group">
+                                <select required data-placeholder="Choose a Country..." class="chosen-select"
+                                    tabindex="2" style="width:350px;" id="customerSelect" name="customer_id">
+                                    <option selected disabled value="">Select Customer</option>
+                                    @foreach ($customers as $customer)
+                                        <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <input type="hidden" value="In" name="group">
 
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Invoices</label>
+
+                        <div class="col-sm-4">
+
+                            <div class="input-group">
+                                <select required data-placeholder="Choose a Country..." class="chosen-select"
+                                    tabindex="2" style="width:350px;" id="vendorSelect" name="invoice_id">
+                                    <option selected disabled value="">Select Invoice</option>
+                                    @foreach ($invoices as $invoice)
+                                        <option value="{{ $invoice->id }}">{{ sprintf("%04d", $invoice->id) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
 
                         <label class="col-sm-2 control-label">Amount</label>

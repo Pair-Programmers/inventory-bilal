@@ -8,6 +8,7 @@ use App\Models\Employee;
 use App\Models\Customer;
 use App\Models\Vendor;
 use App\Models\Expense;
+use App\Models\Invoice;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,9 @@ class PaymentController extends Controller
         $customers = Customer::all();
         $vendors = Vendor::all();
         $accounts = Account::all();
-        return view('adminpanel.pages.payment_make', compact('employees', 'accounts', 'customers', 'vendors'));
+        $invoices = Invoice::where('type', 'Purchase')->get();
+
+        return view('adminpanel.pages.payment_make', compact('invoices', 'employees', 'accounts', 'customers', 'vendors'));
     }
 
     public function createRecieve()
@@ -40,7 +43,8 @@ class PaymentController extends Controller
         $customers = Customer::all();
         $vendors = Vendor::all();
         $accounts = Account::all();
-        return view('adminpanel.pages.payment_recieve', compact('employees', 'accounts', 'customers', 'vendors'));
+        $invoices = Invoice::where('type', 'Sale')->get();
+        return view('adminpanel.pages.payment_recieve', compact('invoices', 'employees', 'accounts', 'customers', 'vendors'));
     }
 
     /**
@@ -60,6 +64,7 @@ class PaymentController extends Controller
 
         $inputs = $request->all();
         $inputs['created_by'] = Auth::guard('admin')->id();
+        $inputs['note'] = 'Invoice # ' . sprintf("%04d", $inputs['invoice_id']);
         if($inputs['group'] == 'In'){
             $inputs['type'] = 'Customer Payment';
             $customer = Customer::find($inputs['customer_id']);
