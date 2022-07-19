@@ -12,6 +12,7 @@ use App\Models\Product;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseInvoiceController extends Controller
 {
@@ -23,21 +24,28 @@ class PurchaseInvoiceController extends Controller
     public function index()
     {
         //$products = Product::with('category', 'creator')->orderby('id', 'desc')->get();
-        $invoices = Invoice::where('type', 'Purchase')->orderby('id', 'desc')->get();
+        $invoices = Invoice::where('invoices.type', 'Purchase')->orderby('invoices.id', 'desc')
+        ->leftJoin('payments', 'payments.invoice_id', 'invoices.id')
+        ->select('invoices.*', DB::raw('SUM(payments.amount) as amount_paid'))
+        ->groupBy('invoices.id')
+        ->get();
         return view('adminpanel.pages.purchase_invoice_list', compact('invoices'));
     }
 
     public function search(Request $request)
     {
-        $invoices = Invoice::where('type', 'Purchase')
+        $invoices = Invoice::where('invoices.type', 'Purchase')
             ->when($request->filled('start_date') , function ($query) use ($request){
-                return $query->where('issue_date' , '>=', $request->start_date);
+                return $query->where('invoices.issue_date' , '>=', $request->start_date);
 
             })
             ->when($request->filled('end_date') , function ($query) use ($request){
-                return $query->where('issue_date' , '<=', $request->end_date);
+                return $query->where('invoices.issue_date' , '<=', $request->end_date);
             })
-            ->orderby('id', 'desc')->get();
+            ->leftJoin('payments', 'payments.invoice_id', 'invoices.id')
+            ->select('invoices.*', DB::raw('SUM(payments.amount) as amount_paid'))
+            ->groupBy('invoices.id')
+            ->get();
             $request->flash();
         return view('adminpanel.pages.purchase_invoice_list', compact('invoices'));
     }
