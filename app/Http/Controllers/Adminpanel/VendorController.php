@@ -73,7 +73,11 @@ class VendorController extends Controller
     public function show($id)
     {
         $vendor = Vendor::findOrFail($id);
-        $invoices = Invoice::where('vendor_id', $vendor->id)->get();
+        $invoices = Invoice::where('invoices.vendor_id', $vendor->id)->orderby('invoices.id', 'desc')
+        ->leftJoin('payments', 'payments.invoice_id', 'invoices.id')
+        ->select('invoices.*', DB::raw('SUM(payments.amount) as amount_paid'))
+        ->groupBy('invoices.id')
+        ->get();
         $paymentsTotalAmount = Payment::where('vendor_id', $id)->sum('amount');
         $products = Product::join('invoice_details', 'invoice_details.product_id', 'products.id')
         ->join('invoices', 'invoices.id', 'invoice_details.invoice_id')
