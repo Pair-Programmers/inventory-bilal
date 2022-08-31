@@ -101,7 +101,7 @@
                                                 tabindex="2" style="width:600px;" id="productSelect">
                                                 <option value="">Select Product</option>
                                                 @foreach ($products as $key => $product)
-                                                    <option value="{{ $key }}">{{ $product->name }}</option>
+                                                    <option value="{{ $key }}">{{ $product->code }} - {{ $product->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
