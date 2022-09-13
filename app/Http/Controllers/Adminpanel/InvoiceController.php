@@ -270,9 +270,12 @@ class InvoiceController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
-        $categories = ProductCategory::all();
-        return view('adminpanel.pages.product_edit', compact('product', 'categories'));
+        $invoice = Invoice::where('id', $id)->with('detail')->get()->first();
+        $accounts = Account::all();
+        $customers = Customer::all();
+        $vendors = Vendor::with('purchasedProducts')->get();
+        $products = Product::with('category', 'creator', 'model')->orderby('id', 'desc')->get();
+        return view('adminpanel.pages.sale_invoice_edit', compact('invoice', 'products', 'customers', 'accounts', 'vendors'));
     }
 
     /**
@@ -284,7 +287,110 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'customer_id'=> 'required',
+            'product_id'=> 'required',
+            'vendor_id'=> 'required',
+        ]);
 
+        $invoice = Invoice::find($id);
+
+        if($invoice){
+            $items = [];
+            $customer = Customer::find($request->customer_id);
+
+            $inputs = $request->all();
+            $no_of_items = 0;
+            foreach ($inputs['product_qty'] as $key => $value) {
+                $no_of_items = $no_of_items + $value;
+            }
+            $inputs['no_of_items'] = $no_of_items;
+            $inputs['no_of_products'] = sizeof($inputs['product_id']);
+            $inputs['type'] = 'Sale';
+            if($customer->type == 'Cash'){
+                $inputs['group'] = 'Cash';
+            }
+            else{
+                $inputs['group'] = 'Credit';
+                $preBalance = $customer->balance;
+                $inputs['pre_balance'] = $customer->balance;
+                if($inputs['cash_recieved'] > 0){
+                    $customer->balance = $preBalance + intval($inputs['amount']) - intval($inputs['cash_recieved']);
+                }
+                else{
+                    $customer->balance = $preBalance + intval($inputs['amount']);
+                }
+                $customer->save();
+            }
+            $inputs['created_by'] = Auth::guard('admin')->id();
+            $inputs['amount'] = intval($inputs['amount']);
+
+            $product_ids = $inputs['product_id'];
+            $product_qtys = $inputs['product_qty'];
+            $product_sale_price = $inputs['product_sale_price'];
+            $vendor_ids = $inputs['vendor_id'];
+
+            unset($inputs['product_id']);
+            unset($inputs['vendor_id']);
+            unset($inputs['product_qty']);
+            unset($inputs['product_sale_price']);
+
+            $invoice->no_of_items = $inputs['no_of_items'];
+            $invoice->no_of_items = $inputs['amount'];
+            $invoice->no_of_items = $inputs['no_of_products'];
+            $invoice->no_of_items = $inputs['customer_id'];
+
+            foreach ($invoice->detail as $key => $invoiceDetail) {
+                $product = Product::find($invoiceDetail->product_id);
+                $invoiceDetailTemp = InvoiceDetail::find($invoiceDetail->id);
+                $product->available_qty = $product->available_qty + $invoiceDetail->sale_quantity;
+                $product->save();
+                $invoiceDetailTemp->delete();
+            }
+            for ($i=0; $i < sizeof($product_ids); $i++) {
+                $product = Product::find($product_ids[$i]);
+                InvoiceDetail::create(['product_id'=>$product_ids[$i],
+                                 'sale_quantity'=>$product_qtys[$i],
+                                 'purchase_price'=>$product->cost_price,
+                                 'sale_price'=>$product_sale_price[$i],
+                                 'total_ammount'=>$product_sale_price[$i] * $product_qtys[$i],
+                                 'invoice_id'=>$invoice->id,
+                                 'vendor_id'=>$vendor_ids[$i]]);
+                $product->available_qty = $product->available_qty - $product_qtys[$i];
+                $product->save();
+                array_push($items, ['name'=>$product->name, 'qty'=>$product_qtys[$i], 'price'=>$product_sale_price[$i]]);
+            }
+
+            $payment = Payment::where('invoice_id', $invoice->id)->where('type', 'Sale')->first();
+
+            if($payment){
+                if($inputs['cash_recieved'] > 0){
+                    $payment->payment_date = intval($inputs['amount']);
+                    $payment->customer_id = $customer->id;
+                    if($customer->type == 'Cash'){
+                        $payment->amount = intval($inputs['amount']);
+                        $payment->note = 'Created Auto By System in Invoice # ' . $invoice->id;
+                   }
+                    else{
+                        $payment->amount = intval($inputs['cash_recieved']);
+                        $payment->note = 'Recieved in Credit Invoice # ' . $invoice->id;
+                    }
+                } else {
+                    if($customer->type == 'Cash'){
+                        $payment->amount = intval($inputs['amount']);
+                        $payment->note = 'Created Auto By System in Invoice # ' . $invoice->id;
+                    }
+                    else{
+                        $payment->delete();
+                    }
+                }
+                $payment->save();
+            }
+
+            $invoice->save();
+            return redirect()->back()->with('success', 'Invoice updated Successfuly !');
+        }
+        return redirect()->back()->with('error', 'Invoice not found');
     }
 
     /**

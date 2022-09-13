@@ -139,9 +139,9 @@
                         <a href="{{route('admin.sale_invoice.show', $invoice->id)}}">
                             <small class="label label-warning"><i class="fa"></i>View</small>
                         </a>
-                        {{-- <a href="{{route('admin.sale_invoice.show', $invoice->id)}}">
+                        <a href="{{route('admin.sale_invoice.edit', $invoice->id)}}">
                             <small class="label label-primary"><i class="fa"></i>Edit</small>
-                        </a> --}}
+                        </a>
                         <a onclick="deleteSaleInvoice({{$invoice->id}})">
                             <small class="label label-danger"><i class="fa"></i>Delete</small>
                         </a>

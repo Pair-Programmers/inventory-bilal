@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 18, 2022 at 03:44 AM
--- Server version: 10.3.34-MariaDB-cll-lve
--- PHP Version: 7.4.29
+-- Generation Time: Sep 13, 2022 at 01:07 PM
+-- Server version: 10.3.35-MariaDB-cll-lve
+-- PHP Version: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -48,7 +48,7 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`id`, `name`, `account_title`, `type`, `account_number`, `bank_name`, `as_off_date`, `opening_balance`, `balance`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 'Cash Counter', NULL, 'Cash', NULL, NULL, '2022-04-26', 0, -10000, 1, '2022-04-26 22:12:17', '2022-05-13 17:10:15'),
+(1, 'Cash Counter', NULL, 'Cash', NULL, NULL, '2022-04-26', 0, -50000, 1, '2022-04-26 22:12:17', '2022-06-25 15:43:59'),
 (2, 'Bank Account', NULL, 'Bank', NULL, NULL, '2022-04-26', 0, 0, 1, '2022-04-26 22:12:17', '2022-04-26 22:12:17');
 
 -- --------------------------------------------------------
@@ -107,7 +107,8 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `name`, `phone`, `address`, `email`, `profile_image`, `type`, `status`, `balance`, `opening_balance`, `created_by`, `created_at`, `updated_at`) VALUES
-(1, 'Cash Customer', NULL, NULL, NULL, 'profile_image_icon.png', 'Cash', 'Active', 0, 0, 1, '2022-04-26 22:12:17', '2022-04-26 22:12:17');
+(1, 'Cash Customer', NULL, NULL, NULL, 'profile_image_icon.png', 'Cash', 'Active', 0, 0, 1, '2022-04-26 22:12:17', '2022-04-26 22:12:17'),
+(2, 'Arslan', NULL, NULL, NULL, 'profile_image_icon.png', 'Credit', 'Active', 28000, 0, 2, '2022-06-25 15:39:42', '2022-06-25 16:52:36');
 
 -- --------------------------------------------------------
 
@@ -211,13 +212,48 @@ CREATE TABLE `invoices` (
 
 INSERT INTO `invoices` (`id`, `amount`, `no_of_items`, `no_of_products`, `issue_date`, `discount`, `reference_no`, `description`, `type`, `group`, `cash_recieved`, `customer_id`, `vendor_id`, `created_by`, `created_at`, `updated_at`, `pre_balance`) VALUES
 (1, 30000, 10, 1, '2022-05-11', 0, NULL, NULL, 'Purchase', 'Cash', 0, NULL, 5, 2, '2022-05-10 23:01:47', '2022-05-10 23:01:47', 0),
-(2, 20000, 5, 1, '2022-05-13', 0, NULL, NULL, 'Sale', 'Cash', 0, 1, NULL, 2, '2022-05-13 17:10:15', '2022-05-13 17:10:15', 0),
 (3, 77165, 5, 1, '2022-05-26', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-05-26 13:55:28', '2022-05-26 13:55:28', 0),
 (4, 14868, 1, 1, '2022-05-26', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-05-26 13:55:48', '2022-05-26 13:55:48', 0),
-(5, 24600, 24, 2, '2022-05-26', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-05-26 14:02:04', '2022-05-26 14:02:04', 0),
 (6, 16104, 24, 2, '2022-05-26', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-05-26 14:03:50', '2022-05-26 14:03:50', 0),
 (8, 6980, 1, 1, '2022-05-26', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-05-26 14:10:44', '2022-05-26 14:10:44', 0),
-(9, 2, 2, 1, '2022-05-26', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 3, 2, '2022-05-26 14:11:04', '2022-05-26 14:11:04', 0);
+(9, 2, 2, 1, '2022-05-26', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 3, 2, '2022-05-26 14:11:04', '2022-05-26 14:11:04', 0),
+(12, 25000, 5, 1, '2022-06-25', 0, NULL, NULL, 'Sale', 'Credit', 0, 2, NULL, 2, '2022-06-25 16:36:54', '2022-06-25 16:36:54', 0),
+(13, 3000, 3, 1, '2022-06-25', 0, NULL, NULL, 'Sale', 'Credit', 0, 2, NULL, 2, '2022-06-25 16:52:36', '2022-06-25 16:52:36', 25000),
+(21, 5000, 5, 1, '2022-07-18', 0, NULL, NULL, 'Purchase', 'Credit', 2000, NULL, 9, 2, '2022-07-18 10:01:17', '2022-07-18 10:01:17', 0),
+(22, 5000, 5, 1, '2022-07-20', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 10, 2, '2022-07-20 11:59:16', '2022-07-20 11:59:16', 0),
+(23, 5000, 5, 1, '2022-08-08', 0, NULL, NULL, 'Purchase', 'Credit', 2000, NULL, 10, 2, '2022-08-08 14:43:36', '2022-08-08 14:43:36', 0),
+(24, 244464, 88, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-08-30 13:20:09', '2022-08-30 13:20:09', 0),
+(25, 69335, 49, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-08-30 13:28:29', '2022-08-30 13:28:29', 244464),
+(26, 221760, 99, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-08-30 13:32:30', '2022-08-30 13:32:30', 313799),
+(27, 306508, 74, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-08-30 13:36:02', '2022-08-30 13:36:02', 535559),
+(28, 94500, 100, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-08-30 13:40:59', '2022-08-30 13:40:59', 842067),
+(29, 25740, 10, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-08-30 13:48:11', '2022-08-30 13:48:11', 936567),
+(30, 9450, 10, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-08-30 14:07:27', '2022-08-30 14:07:27', 962307),
+(31, 2682, 2, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-08-30 14:16:43', '2022-08-30 14:16:43', 971757),
+(32, 1872, 2, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-08-30 14:19:07', '2022-08-30 14:19:07', 974439),
+(33, 20000, 4, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 11, 2, '2022-08-30 14:26:30', '2022-08-30 14:26:30', 0),
+(34, 16000, 4, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 11, 2, '2022-08-30 14:27:41', '2022-08-30 14:27:41', 20000),
+(35, 21913, 17, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-08-30 16:27:57', '2022-08-30 16:27:57', 976311),
+(36, 1800, 4, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-08-30 16:28:21', '2022-08-30 16:28:21', 998224),
+(37, 7004, 17, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-08-30 16:31:27', '2022-08-30 16:31:27', 1000024),
+(38, 26082, 27, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-08-30 16:32:21', '2022-08-30 16:32:21', 1007028),
+(39, 19600, 40, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-08-30 16:39:38', '2022-08-30 16:39:38', 1033110),
+(40, 7500, 10, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 3, 2, '2022-08-30 16:44:28', '2022-08-30 16:44:28', 0),
+(41, 9231, 13, 2, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-08-30 16:53:08', '2022-08-30 16:53:08', 1052710),
+(42, 4000, 10, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-08-30 16:59:03', '2022-08-30 16:59:03', 1061941),
+(43, 10500, 14, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 3, 2, '2022-08-30 17:15:42', '2022-08-30 17:15:42', 7500),
+(44, 3675, 7, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 3, 2, '2022-08-30 17:19:32', '2022-08-30 17:19:32', 18000),
+(45, 6000, 8, 1, '2022-08-30', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 11, 2, '2022-08-30 17:22:35', '2022-08-30 17:22:35', 36000),
+(46, 200, 1, 1, '2022-09-06', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-09-06 16:11:43', '2022-09-06 16:11:43', 1065941),
+(47, 0, 15, 3, '2022-09-06', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-09-06 16:28:07', '2022-09-06 16:28:07', 1066141),
+(48, 0, 8, 2, '2022-09-06', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 3, 2, '2022-09-06 16:30:55', '2022-09-06 16:30:55', 21675),
+(49, 0, 3, 2, '2022-09-06', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-09-06 16:33:01', '2022-09-06 16:33:01', 1066141),
+(51, 0, 4, 2, '2022-09-06', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-09-06 16:52:22', '2022-09-06 16:52:22', 1071481),
+(52, 0, 1, 1, '2022-09-06', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 3, 2, '2022-09-06 16:53:50', '2022-09-06 16:53:50', 21675),
+(53, 0, 2, 1, '2022-09-06', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-09-06 17:05:59', '2022-09-06 17:05:59', 1071481),
+(54, 0, 4, 1, '2022-09-06', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 3, 2, '2022-09-06 17:07:31', '2022-09-06 17:07:31', 21675),
+(55, 3700, 2, 1, '2022-09-06', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 4, 2, '2022-09-06 17:15:56', '2022-09-06 17:15:56', 1071481),
+(56, 0, 4, 1, '2022-09-06', 0, NULL, NULL, 'Purchase', 'Credit', 0, NULL, 3, 2, '2022-09-06 17:16:47', '2022-09-06 17:16:47', 21675);
 
 -- --------------------------------------------------------
 
@@ -233,6 +269,7 @@ CREATE TABLE `invoice_details` (
   `sale_price` int(11) DEFAULT NULL,
   `total_ammount` int(11) NOT NULL,
   `invoice_id` bigint(20) UNSIGNED NOT NULL,
+  `vendor_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -241,17 +278,57 @@ CREATE TABLE `invoice_details` (
 -- Dumping data for table `invoice_details`
 --
 
-INSERT INTO `invoice_details` (`id`, `product_id`, `sale_quantity`, `purchase_price`, `sale_price`, `total_ammount`, `invoice_id`, `created_at`, `updated_at`) VALUES
-(1, 3, 10, 3000, NULL, 30000, 1, '2022-05-10 23:01:47', '2022-05-10 23:01:47'),
-(2, 3, 5, 3000, 4000, 20000, 2, '2022-05-13 17:10:15', '2022-05-13 17:10:15'),
-(3, 270, 5, 15433, NULL, 77165, 3, '2022-05-26 13:55:28', '2022-05-26 13:55:28'),
-(4, 270, 1, 14868, NULL, 14868, 4, '2022-05-26 13:55:48', '2022-05-26 13:55:48'),
-(5, 61, 12, 970, NULL, 11640, 5, '2022-05-26 14:02:04', '2022-05-26 14:02:04'),
-(6, 61, 12, 1080, NULL, 12960, 5, '2022-05-26 14:02:04', '2022-05-26 14:02:04'),
-(7, 62, 12, 700, NULL, 8400, 6, '2022-05-26 14:03:50', '2022-05-26 14:03:50'),
-(8, 62, 12, 642, NULL, 7704, 6, '2022-05-26 14:03:50', '2022-05-26 14:03:50'),
-(11, 34, 1, 6980, NULL, 6980, 8, '2022-05-26 14:10:44', '2022-05-26 14:10:44'),
-(12, 34, 2, 1, NULL, 2, 9, '2022-05-26 14:11:04', '2022-05-26 14:11:04');
+INSERT INTO `invoice_details` (`id`, `product_id`, `sale_quantity`, `purchase_price`, `sale_price`, `total_ammount`, `invoice_id`, `vendor_id`, `created_at`, `updated_at`) VALUES
+(1, 3, 10, 3000, NULL, 30000, 1, NULL, '2022-05-10 23:01:47', '2022-05-10 23:01:47'),
+(3, 270, 5, 15433, NULL, 77165, 3, NULL, '2022-05-26 13:55:28', '2022-05-26 13:55:28'),
+(4, 270, 1, 14868, NULL, 14868, 4, NULL, '2022-05-26 13:55:48', '2022-05-26 13:55:48'),
+(7, 62, 12, 700, NULL, 8400, 6, NULL, '2022-05-26 14:03:50', '2022-05-26 14:03:50'),
+(8, 62, 12, 642, NULL, 7704, 6, NULL, '2022-05-26 14:03:50', '2022-05-26 14:03:50'),
+(11, 34, 1, 6980, NULL, 6980, 8, NULL, '2022-05-26 14:10:44', '2022-05-26 14:10:44'),
+(12, 34, 2, 1, NULL, 2, 9, NULL, '2022-05-26 14:11:04', '2022-05-26 14:11:04'),
+(15, 271, 5, 0, 5000, 25000, 12, 6, '2022-06-25 16:36:54', '2022-06-25 16:36:54'),
+(16, 272, 3, 0, 1000, 3000, 13, 5, '2022-06-25 16:52:36', '2022-06-25 16:52:36'),
+(24, 271, 5, 1000, NULL, 5000, 21, NULL, '2022-07-18 10:01:17', '2022-07-18 10:01:17'),
+(25, 271, 5, 1000, NULL, 5000, 22, NULL, '2022-07-20 11:59:16', '2022-07-20 11:59:16'),
+(26, 272, 5, 1000, NULL, 5000, 23, NULL, '2022-08-08 14:43:36', '2022-08-08 14:43:36'),
+(27, 116, 88, 2778, NULL, 244464, 24, NULL, '2022-08-30 13:20:09', '2022-08-30 13:20:09'),
+(28, 111, 49, 1415, NULL, 69335, 25, NULL, '2022-08-30 13:28:29', '2022-08-30 13:28:29'),
+(29, 118, 99, 2240, NULL, 221760, 26, NULL, '2022-08-30 13:32:30', '2022-08-30 13:32:30'),
+(30, 110, 74, 4142, NULL, 306508, 27, NULL, '2022-08-30 13:36:02', '2022-08-30 13:36:02'),
+(31, 119, 100, 945, NULL, 94500, 28, NULL, '2022-08-30 13:40:59', '2022-08-30 13:40:59'),
+(32, 120, 10, 2574, NULL, 25740, 29, NULL, '2022-08-30 13:48:11', '2022-08-30 13:48:11'),
+(33, 119, 10, 945, NULL, 9450, 30, NULL, '2022-08-30 14:07:27', '2022-08-30 14:07:27'),
+(34, 273, 2, 1341, NULL, 2682, 31, NULL, '2022-08-30 14:16:43', '2022-08-30 14:16:43'),
+(35, 274, 2, 936, NULL, 1872, 32, NULL, '2022-08-30 14:19:07', '2022-08-30 14:19:07'),
+(36, 46, 4, 5000, NULL, 20000, 33, NULL, '2022-08-30 14:26:30', '2022-08-30 14:26:30'),
+(37, 275, 4, 4000, NULL, 16000, 34, NULL, '2022-08-30 14:27:41', '2022-08-30 14:27:41'),
+(38, 234, 17, 1289, NULL, 21913, 35, NULL, '2022-08-30 16:27:57', '2022-08-30 16:27:57'),
+(39, 276, 4, 450, NULL, 1800, 36, NULL, '2022-08-30 16:28:21', '2022-08-30 16:28:21'),
+(40, 277, 17, 412, NULL, 7004, 37, NULL, '2022-08-30 16:31:27', '2022-08-30 16:31:27'),
+(41, 235, 27, 966, NULL, 26082, 38, NULL, '2022-08-30 16:32:22', '2022-08-30 16:32:22'),
+(42, 278, 40, 490, NULL, 19600, 39, NULL, '2022-08-30 16:39:38', '2022-08-30 16:39:38'),
+(43, 223, 10, 750, NULL, 7500, 40, NULL, '2022-08-30 16:44:28', '2022-08-30 16:44:28'),
+(44, 228, 10, 750, NULL, 7500, 41, NULL, '2022-08-30 16:53:08', '2022-08-30 16:53:08'),
+(45, 228, 3, 577, NULL, 1731, 41, NULL, '2022-08-30 16:53:08', '2022-08-30 16:53:08'),
+(46, 231, 10, 400, NULL, 4000, 42, NULL, '2022-08-30 16:59:03', '2022-08-30 16:59:03'),
+(47, 227, 14, 750, NULL, 10500, 43, NULL, '2022-08-30 17:15:42', '2022-08-30 17:15:42'),
+(48, 229, 7, 525, NULL, 3675, 44, NULL, '2022-08-30 17:19:32', '2022-08-30 17:19:32'),
+(49, 279, 8, 750, NULL, 6000, 45, NULL, '2022-08-30 17:22:35', '2022-08-30 17:22:35'),
+(50, 187, 1, 200, NULL, 200, 46, NULL, '2022-09-06 16:11:43', '2022-09-06 16:11:43'),
+(51, 204, 5, NULL, NULL, 0, 47, NULL, '2022-09-06 16:28:07', '2022-09-06 16:28:07'),
+(52, 280, 4, 478, NULL, 1912, 47, NULL, '2022-09-06 16:28:07', '2022-09-06 16:28:07'),
+(53, 204, 6, 681, NULL, 4086, 47, NULL, '2022-09-06 16:28:07', '2022-09-06 16:28:07'),
+(54, 203, 4, NULL, NULL, 0, 48, NULL, '2022-09-06 16:30:55', '2022-09-06 16:30:55'),
+(55, 202, 4, NULL, NULL, 0, 48, NULL, '2022-09-06 16:30:55', '2022-09-06 16:30:55'),
+(56, 83, 1, NULL, NULL, 0, 49, NULL, '2022-09-06 16:33:01', '2022-09-06 16:33:01'),
+(57, 83, 2, 4204, NULL, 8408, 49, NULL, '2022-09-06 16:33:01', '2022-09-06 16:33:01'),
+(59, 178, 1, NULL, NULL, 0, 51, NULL, '2022-09-06 16:52:22', '2022-09-06 16:52:22'),
+(60, 282, 3, 3693, NULL, 11079, 51, NULL, '2022-09-06 16:52:22', '2022-09-06 16:52:22'),
+(61, 83, 1, NULL, NULL, 0, 52, NULL, '2022-09-06 16:53:50', '2022-09-06 16:53:50'),
+(62, 283, 2, NULL, NULL, 0, 53, NULL, '2022-09-06 17:05:59', '2022-09-06 17:05:59'),
+(63, 284, 4, NULL, NULL, 0, 54, NULL, '2022-09-06 17:07:31', '2022-09-06 17:07:31'),
+(64, 100, 2, 1850, NULL, 3700, 55, NULL, '2022-09-06 17:15:56', '2022-09-06 17:15:56'),
+(65, 103, 4, NULL, NULL, 0, 56, NULL, '2022-09-06 17:16:47', '2022-09-06 17:16:47');
 
 -- --------------------------------------------------------
 
@@ -294,7 +371,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (22, '2022_04_09_080002_add_coloumn_vendor_and_custom_id_in_payments', 1),
 (23, '2022_04_26_170420_create_product_models_table', 1),
 (24, '2022_04_26_171743_add_coloumn_model_id_in_products', 1),
-(25, '2022_05_02_100236_add_coloumn_code_in_products', 2);
+(25, '2022_05_02_100236_add_coloumn_code_in_products', 2),
+(26, '2022_06_18_092731_add_coloumn_vendor_id_in_invoice_details', 3);
 
 -- --------------------------------------------------------
 
@@ -337,7 +415,16 @@ CREATE TABLE `payments` (
 --
 
 INSERT INTO `payments` (`id`, `amount`, `payment_date`, `group`, `type`, `note`, `customer_id`, `vendor_id`, `invoice_id`, `expense_id`, `employee_id`, `account_id`, `created_by`, `created_at`, `updated_at`) VALUES
-(2, 20000, '2022-05-13', 'In', 'Sale', 'Created Auto By System', NULL, NULL, 2, NULL, NULL, 1, 2, '2022-05-13 17:10:15', '2022-05-13 17:10:15');
+(4, 20000, '2022-06-25', 'Out', 'Vendor Payment', NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, '2022-06-25 15:57:34', '2022-06-25 15:57:34'),
+(5, 20000, '2022-06-26', 'Out', 'Vendor Payment', NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, '2022-06-26 20:55:55', '2022-06-26 20:55:55'),
+(6, 30000, '2022-06-26', 'Out', 'Vendor Payment', NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, '2022-06-26 20:58:15', '2022-06-26 20:58:15'),
+(7, 20000, '2022-07-03', 'Out', 'Vendor Payment', NULL, NULL, NULL, NULL, NULL, NULL, 1, 2, '2022-07-03 22:08:37', '2022-07-03 22:08:37'),
+(15, 2000, '2022-07-18', 'Out', 'Purchase', 'Paid in Credit Invoice # 21', NULL, 9, 21, NULL, NULL, 1, 2, '2022-07-18 10:01:17', '2022-07-18 10:01:17'),
+(16, 3000, '2022-07-18', 'Out', 'Vendor Payment', 'Invoice # 0021', NULL, 9, 21, NULL, NULL, 1, 2, '2022-07-18 10:03:25', '2022-07-18 10:03:25'),
+(17, 3000, '2022-07-20', 'Out', 'Vendor Payment', 'Invoice # 0022', NULL, 10, 22, NULL, NULL, 1, 2, '2022-07-20 12:00:08', '2022-07-20 12:00:08'),
+(18, 2000, '2022-07-25', 'Out', 'Vendor Payment', 'Invoice # 0022', NULL, 10, 22, NULL, NULL, 1, 2, '2022-07-25 12:21:09', '2022-07-25 12:21:09'),
+(19, 2000, '2022-08-08', 'Out', 'Purchase', 'Paid in Credit Invoice # 23', NULL, 10, 23, NULL, NULL, 1, 2, '2022-08-08 14:43:36', '2022-08-08 14:43:36'),
+(20, 3000, '2022-08-08', 'Out', 'Vendor Payment', 'Invoice # 0023', NULL, 10, 23, NULL, NULL, 1, 2, '2022-08-08 14:45:29', '2022-08-08 14:45:29');
 
 -- --------------------------------------------------------
 
@@ -428,7 +515,7 @@ INSERT INTO `products` (`id`, `code`, `name`, `cost_price`, `sale_price`, `openi
 (43, 'M3000-1002120-P', 'Camshaft Bush', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 02:43:22', '2022-05-24 02:43:22', NULL, NULL, NULL, 5),
 (44, '1004-00944', 'Piston YT Old Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 02:43:47', '2022-05-24 02:43:47', NULL, NULL, NULL, 5),
 (45, 'M3000-1004004', 'Piston Pin YT Old Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 02:44:12', '2022-05-24 02:44:12', NULL, NULL, NULL, 5),
-(46, '/', 'Torque Rod Bush - Small', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'YouTong', 6, NULL, 2, '2022-05-24 02:44:58', '2022-05-24 02:44:58', NULL, NULL, NULL, 5),
+(46, '2919-00049', 'Torque Rod Bush - Big', 0, 0, 0, 4, NULL, '[null]', NULL, NULL, 'YouTong', 6, NULL, 2, '2022-05-24 02:44:58', '2022-08-30 14:26:30', NULL, NULL, NULL, 5),
 (47, '\'', 'King Pin', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 02:45:24', '2022-05-24 02:45:24', NULL, NULL, NULL, 5),
 (48, 'M1000-1002132', 'Liner Rubber Ring YC', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 02:46:16', '2022-05-24 02:46:16', NULL, NULL, NULL, 5),
 (49, ';', 'Condenser Fan', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 02:46:49', '2022-05-24 02:46:49', NULL, NULL, NULL, 6),
@@ -443,7 +530,7 @@ INSERT INTO `products` (`id`, `code`, `name`, `cost_price`, `sale_price`, `openi
 (58, '=', 'Air Compressor Kit - Without RIng', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 02:50:57', '2022-05-24 02:50:57', NULL, NULL, NULL, 5),
 (59, '8109-00002', 'AC Dryer Filter', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'YouTong', 6, NULL, 2, '2022-05-24 02:51:28', '2022-05-24 02:51:28', NULL, NULL, NULL, 5),
 (60, 'KJ100-1004007A-H', 'Big End', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 02:51:54', '2022-05-24 02:51:54', NULL, NULL, NULL, 5),
-(61, 'M6600-1003103', 'Exhaust Valve', 0, 0, 0, 24, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 02:52:24', '2022-05-26 14:02:04', NULL, NULL, NULL, 5),
+(61, 'M6600-1003103', 'Exhaust Valve', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 02:52:24', '2022-08-30 17:27:16', NULL, NULL, NULL, 5),
 (62, 'M6600-1003111', 'Intake Valve', 0, 0, 0, 24, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 02:52:46', '2022-05-26 14:03:50', NULL, NULL, NULL, 5),
 (63, '_', 'Turbo Garret', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 02:53:27', '2022-05-24 02:53:27', NULL, NULL, NULL, 5),
 (64, '5940-13468', 'Gas Spring', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 02:53:52', '2022-05-24 02:53:52', NULL, NULL, NULL, 5),
@@ -465,7 +552,7 @@ INSERT INTO `products` (`id`, `code`, `name`, `cost_price`, `sale_price`, `openi
 (80, '1761-00307', 'Clutch Release Pipe', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:02:04', '2022-05-24 03:02:04', NULL, NULL, NULL, 5),
 (81, 'KN27000', 'Level Valve SMT', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:02:29', '2022-05-24 03:02:29', NULL, NULL, NULL, 5),
 (82, '3774-0001', 'Indicator Assembly', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:02:54', '2022-05-24 03:02:54', NULL, NULL, NULL, 5),
-(83, '2214-00100', 'Shaft Cross', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:04:47', '2022-05-24 03:04:47', NULL, NULL, NULL, 5),
+(83, '2214-00100', 'Shaft Cross', 0, 0, 0, 4, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:04:47', '2022-09-06 16:53:50', NULL, NULL, NULL, 5),
 (84, '000298', 'Clutch Bearing QJ', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:05:22', '2022-05-24 03:05:22', NULL, NULL, NULL, 5),
 (85, '3151000157', 'Clutch Bearing GD', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:05:49', '2022-05-24 03:05:49', NULL, NULL, NULL, 5),
 (86, '3151-000928', 'Clutch Bearing ZF New Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:06:36', '2022-05-24 03:06:36', NULL, NULL, NULL, 5),
@@ -482,27 +569,27 @@ INSERT INTO `products` (`id`, `code`, `name`, `cost_price`, `sale_price`, `openi
 (97, '3514-00059', 'Foot Brake Valve Old Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'YouTong', 6, NULL, 2, '2022-05-24 03:26:10', '2022-05-24 03:26:10', NULL, NULL, NULL, 5),
 (98, '3527-00042', 'Relay Valve', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:26:34', '2022-05-24 03:26:34', NULL, NULL, NULL, 5),
 (99, '1105-00435', 'Lifty Pump Old Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:27:05', '2022-05-24 03:27:05', NULL, NULL, NULL, 5),
-(100, '1608-00130', 'Clutch Master Cylinder', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:27:31', '2022-05-24 03:27:31', NULL, NULL, NULL, 5),
+(100, '1608-00130', 'Clutch Master Cylinder', 0, 0, 0, 2, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:27:31', '2022-09-06 17:15:56', NULL, NULL, NULL, 5),
 (101, '1608-00082', 'Clutch Master Cylinder', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:28:02', '2022-05-24 03:28:02', NULL, NULL, NULL, 5),
 (102, '612035541', 'Level Valve New Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'Wabco', 6, NULL, 2, '2022-05-24 03:28:36', '2022-05-24 03:28:36', NULL, NULL, NULL, 5),
-(103, '9347144030', 'Four Circuit Relay Valve', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:29:01', '2022-05-24 03:29:01', NULL, NULL, NULL, 5),
+(103, '9347144030', 'Four Circuit Relay Valve', 0, 0, 0, 4, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:29:01', '2022-09-06 17:16:47', NULL, NULL, NULL, 5),
 (104, '3529-00019', 'Air Dryer Assembly', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:29:27', '2022-05-24 03:29:27', NULL, NULL, NULL, 5),
 (105, '1604-00868', 'Clutch Servo Old Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:29:55', '2022-05-24 03:29:55', NULL, NULL, NULL, 5),
 (106, '057875301370', 'Clutch Servo', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'Wabco', 6, NULL, 2, '2022-05-24 03:30:21', '2022-05-24 03:30:21', NULL, NULL, NULL, 5),
 (107, '3552-00753', 'Rear Brake Leather', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'YouTong', 9, NULL, 2, '2022-05-24 03:30:51', '2022-05-24 03:30:51', NULL, NULL, NULL, 5),
 (108, '578-FR', 'Front Brake Leather', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'Stallion', 6, NULL, 2, '2022-05-24 03:31:28', '2022-05-24 03:31:28', NULL, NULL, NULL, 5),
 (109, 'G5800-1105240C-4-S', 'Water Separator Filter', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'YouChai', 6, NULL, 2, '2022-05-24 03:32:05', '2022-05-24 03:32:05', NULL, NULL, NULL, 5),
-(110, '1117-00248', 'Fuel Filter', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:32:51', '2022-05-24 03:40:04', NULL, NULL, NULL, 6),
-(111, '1012-00171', 'Oil Filter', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:33:17', '2022-05-24 03:33:17', NULL, NULL, NULL, 5),
+(110, '1117-00248', 'Fuel Filter', 0, 0, 0, 74, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:32:51', '2022-08-30 13:36:02', NULL, NULL, NULL, 6),
+(111, '1012-00171', 'Oil Filter', 0, 0, 0, 49, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:33:17', '2022-08-30 13:28:29', NULL, NULL, NULL, 5),
 (112, '0F171', 'Oil Filter', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'Stallion', 6, NULL, 2, '2022-05-24 03:33:43', '2022-05-24 03:33:43', NULL, NULL, NULL, 5),
 (113, 'STFF140', 'Fuel Filter', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'Stallion', 6, NULL, 2, '2022-05-24 03:34:12', '2022-05-24 03:34:12', NULL, NULL, NULL, 5),
 (114, 'STFF240', 'Water Separator Filter', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'Stallion', 6, NULL, 2, '2022-05-24 03:35:04', '2022-05-24 03:35:04', NULL, NULL, NULL, 5),
 (115, '1012-00096', 'Oil Filter', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:35:30', '2022-05-24 03:35:30', NULL, NULL, NULL, 7),
-(116, '1105-00159', 'Water Separator Filter YT', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:36:08', '2022-05-24 03:36:08', NULL, NULL, NULL, 5),
+(116, '1105-00159', 'Water Separator Filter YT', 0, 0, 0, 88, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:36:08', '2022-08-30 13:20:09', NULL, NULL, NULL, 5),
 (117, '1105-00425', 'Fuel Filter', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:36:40', '2022-05-24 03:36:40', NULL, NULL, NULL, 6),
-(118, '1105-00096', 'Fuel Filter Old Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:37:11', '2022-05-24 03:37:11', NULL, NULL, NULL, 5),
-(119, '1012-00519', 'Oil Filter', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:37:35', '2022-05-24 03:37:35', NULL, NULL, NULL, 5),
-(120, '1105-00492', 'Fuel Filter', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:39:10', '2022-05-24 03:39:10', NULL, NULL, NULL, 7),
+(118, '1105-00096', 'Fuel Filter Old Model', 0, 0, 0, 99, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:37:11', '2022-08-30 13:32:30', NULL, NULL, NULL, 5),
+(119, '1012-00519', 'Oil Filter', 0, 0, 0, 110, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:37:35', '2022-08-30 14:07:27', NULL, NULL, NULL, 6),
+(120, '1105-00492', 'Fuel Filter', 0, 0, 0, 10, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:39:10', '2022-08-30 13:48:11', NULL, NULL, NULL, 6),
 (121, '1001-07156', 'Engine Front Foundation', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 03:56:04', '2022-05-24 03:56:04', NULL, NULL, NULL, 5),
 (122, '(', 'Air Dryer Filter', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'Wabco', 6, NULL, 2, '2022-05-24 03:56:30', '2022-05-24 03:56:30', NULL, NULL, NULL, 5),
 (123, ')', 'Air Dryer Filter', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'Soral', 6, NULL, 2, '2022-05-24 03:57:04', '2022-05-24 03:57:04', NULL, NULL, NULL, 5),
@@ -560,7 +647,7 @@ INSERT INTO `products` (`id`, `code`, `name`, `cost_price`, `sale_price`, `openi
 (175, '%', 'Fuse Box', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 04:22:03', '2022-05-24 04:22:03', NULL, NULL, NULL, 5),
 (176, '$$', 'Fuse Box Black FT', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 04:22:28', '2022-05-24 04:22:28', NULL, NULL, NULL, 5),
 (177, '35012-01538', 'Brake Pad', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 04:22:59', '2022-05-24 04:22:59', NULL, NULL, NULL, 7),
-(178, '2201-01828', 'Shaft Cross New Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'YouTong', 6, NULL, 2, '2022-05-24 04:23:32', '2022-05-24 04:23:32', NULL, NULL, NULL, 5),
+(178, '2201-01828', 'Shaft Cross New Model', 0, 0, 0, 1, NULL, '[null]', NULL, NULL, 'YouTong', 6, NULL, 2, '2022-05-24 04:23:32', '2022-09-06 16:52:22', NULL, NULL, NULL, 5),
 (179, '3412-00245', 'Tie Rod End', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 04:23:55', '2022-05-24 04:23:55', NULL, NULL, NULL, 5),
 (180, '3412-00243', 'Tie Rod End Small', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 04:24:20', '2022-05-24 04:24:20', NULL, NULL, NULL, 5),
 (181, '1297304402', 'Syncro Ring QJ', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 04:24:46', '2022-05-24 04:24:46', NULL, NULL, NULL, 5),
@@ -569,7 +656,7 @@ INSERT INTO `products` (`id`, `code`, `name`, `cost_price`, `sale_price`, `openi
 (184, '9401-05805', 'Wheel Bearing', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 04:26:00', '2022-05-24 04:26:00', NULL, NULL, NULL, 5),
 (185, '&', 'Boot Lock Black Small', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'YouTong', 6, NULL, 2, '2022-05-24 04:26:24', '2022-05-24 04:26:24', NULL, NULL, NULL, 5),
 (186, '*&', 'ABS Sensor', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'YouTong', 6, NULL, 2, '2022-05-24 04:26:50', '2022-05-24 04:26:50', NULL, NULL, NULL, 5),
-(187, '3104-00918', 'Hub Nut', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'YouTong', 6, NULL, 2, '2022-05-24 04:27:16', '2022-05-24 04:27:16', NULL, NULL, NULL, 5),
+(187, '3104-00918', 'Hub Nut', 0, 0, 0, 1, NULL, '[null]', NULL, NULL, 'YouTong', 6, NULL, 2, '2022-05-24 04:27:16', '2022-09-06 16:11:43', NULL, NULL, NULL, 5),
 (188, '3408-00497', 'Steering Filter', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'YouTong', 6, NULL, 2, '2022-05-24 04:27:46', '2022-05-24 04:27:46', NULL, NULL, NULL, 5),
 (189, '$%', 'Tie Clump', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 04:28:09', '2022-05-24 04:28:09', NULL, NULL, NULL, 5),
 (190, '5940-10482', 'Boot Lock Big New Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 04:28:53', '2022-05-24 04:28:53', NULL, NULL, NULL, 5),
@@ -584,9 +671,9 @@ INSERT INTO `products` (`id`, `code`, `name`, `cost_price`, `sale_price`, `openi
 (199, '+++++', 'Pusher QJ', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 04:32:39', '2022-05-24 04:32:39', NULL, NULL, NULL, 5),
 (200, '3524-00886', 'Retarder Switch', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'TALMA', 6, NULL, 2, '2022-05-24 04:33:06', '2022-05-24 04:33:06', NULL, NULL, NULL, 5),
 (201, '3103-01072', 'Wheel Nut Cover', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 23:45:19', '2022-05-24 23:45:19', NULL, NULL, NULL, 5),
-(202, '3001-00109', 'Kingpin Bush Old Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 23:45:54', '2022-05-24 23:45:54', NULL, NULL, NULL, 5),
-(203, '3001-00108', 'Kingpin Bush Old Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 23:46:25', '2022-05-24 23:46:25', NULL, NULL, NULL, 5),
-(204, '3001-01399', 'Kingpin Bush New Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 23:46:57', '2022-05-24 23:46:57', NULL, NULL, NULL, 5),
+(202, '3001-00109', 'Kingpin Bush Old Model', 0, 0, 0, 4, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 23:45:54', '2022-09-06 16:30:55', NULL, NULL, NULL, 5),
+(203, '3001-00108', 'Kingpin Bush Old Model', 0, 0, 0, 4, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 23:46:25', '2022-09-06 16:30:55', NULL, NULL, NULL, 5),
+(204, '3001-01399', 'Kingpin Bush New Model', 0, 0, 0, 11, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 23:46:57', '2022-09-06 16:28:07', NULL, NULL, NULL, 5),
 (205, 'AA', 'Emergency Door Lock', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'YouTong', 6, NULL, 2, '2022-05-24 23:47:25', '2022-05-24 23:47:25', NULL, NULL, NULL, 5),
 (206, 'AB', 'Indicator Small', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 23:47:51', '2022-05-24 23:47:51', NULL, NULL, NULL, 5),
 (207, 'BB', 'Rod Bed Lamp', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'YouTong', 6, NULL, 2, '2022-05-24 23:48:19', '2022-05-24 23:48:19', NULL, NULL, NULL, 5),
@@ -605,19 +692,19 @@ INSERT INTO `products` (`id`, `code`, `name`, `cost_price`, `sale_price`, `openi
 (220, '9405-01302', 'Belt Tensioner', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'YouTong', 6, NULL, 2, '2022-05-24 23:54:09', '2022-05-24 23:54:09', NULL, NULL, NULL, 5),
 (221, '9405-01300', 'Belt Tensioner', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'YouTong', 6, NULL, 2, '2022-05-24 23:54:40', '2022-05-24 23:54:40', NULL, NULL, NULL, 5),
 (222, 'E', 'AC Panel', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 23:55:18', '2022-05-24 23:55:18', NULL, NULL, NULL, 8),
-(223, '3103-00395', 'Rear Wheel Nut Silver New Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 23:55:47', '2022-05-24 23:55:47', NULL, NULL, NULL, 5),
+(223, '3103-00395', 'Rear Wheel Nut Silver New Model', 0, 0, 0, 10, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 23:55:47', '2022-08-30 16:44:28', NULL, NULL, NULL, 5),
 (224, 'F', 'Front Wheel Nut Black New Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 23:57:20', '2022-05-24 23:57:20', NULL, NULL, NULL, 5),
 (225, 'G', 'Front Wheel Nut Black Old Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 23:58:23', '2022-05-24 23:58:23', NULL, NULL, NULL, 5),
 (226, 'H', 'U-Bolt Nut', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 23:58:43', '2022-05-24 23:58:43', NULL, NULL, NULL, 5),
-(227, 'I', 'Front Wheel Nut Silver New Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 23:59:15', '2022-05-24 23:59:15', NULL, NULL, NULL, 5),
-(228, 'J', 'Front Wheel Bolt Black', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 23:59:46', '2022-05-24 23:59:46', NULL, NULL, NULL, 6),
-(229, 'K', 'Front Wheel Bolt Old Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 00:00:21', '2022-05-25 00:00:21', NULL, NULL, NULL, 5),
+(227, 'I', 'Front Wheel Nut Silver New Model', 0, 0, 0, 14, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 23:59:15', '2022-08-30 17:15:42', NULL, NULL, NULL, 5),
+(228, '3114-00210', 'Front Wheel Bolt Black', 0, 0, 0, 13, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-24 23:59:46', '2022-08-30 16:53:08', NULL, NULL, NULL, 6),
+(229, 'K', 'Front Wheel Bolt Old Model', 0, 0, 0, 7, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 00:00:21', '2022-08-30 17:19:32', NULL, NULL, NULL, 5),
 (230, '3104-00558', 'Rear Wheel Bolt Old Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 00:00:51', '2022-05-25 00:00:51', NULL, NULL, NULL, 5),
-(231, '3104-00750', 'Rear Wheel Bolt New Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 00:01:31', '2022-05-25 00:01:31', NULL, NULL, NULL, 5),
+(231, '3104-00750', 'Rear Wheel Bolt New Model', 0, 0, 0, 10, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 00:01:31', '2022-08-30 16:59:03', NULL, NULL, NULL, 5),
 (232, 'L', 'Rocker Switch', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'YouTong', 6, NULL, 2, '2022-05-25 00:47:37', '2022-05-25 00:47:37', NULL, NULL, NULL, 5),
 (233, '5940-07445', 'Boot Lock Black Small', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 00:48:07', '2022-05-25 00:48:07', NULL, NULL, NULL, 5),
-(234, '2935-00215', 'Jumper Rod Bush Big', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 8, NULL, 2, '2022-05-25 00:49:15', '2022-05-25 00:49:50', NULL, NULL, NULL, 5),
-(235, '2935-00239', 'Jumper Rod Bush Small', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 00:50:17', '2022-05-25 00:50:17', NULL, NULL, NULL, 5),
+(234, '2935-00215', 'Jumper Rod Bush Big', 0, 0, 0, 17, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 00:49:15', '2022-08-30 16:27:57', NULL, NULL, NULL, 5),
+(235, '2935-00239', 'Jumper Rod Bush Small', 0, 0, 0, 27, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 00:50:17', '2022-08-30 16:32:22', NULL, NULL, NULL, 5),
 (236, 'M', 'Commutator Big', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 00:51:08', '2022-05-25 00:51:08', NULL, NULL, NULL, 5),
 (237, 'MM', 'Commutator Small', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 00:51:29', '2022-05-25 00:51:29', NULL, NULL, NULL, 5),
 (238, 'N', 'Carbon Bush Big', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 00:51:52', '2022-05-25 00:51:52', NULL, NULL, NULL, 5),
@@ -644,15 +731,18 @@ INSERT INTO `products` (`id`, `code`, `name`, `cost_price`, `sale_price`, `openi
 (259, '5205-01321', 'Wiper Arm Left', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 01:02:34', '2022-05-25 01:02:34', NULL, NULL, NULL, 5),
 (260, 'WT', 'Wooden Trim', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'YouTong', 6, NULL, 2, '2022-05-25 01:03:02', '2022-05-25 01:03:02', NULL, NULL, NULL, 5),
 (261, 'FLR', 'Front Light Right', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 01:03:33', '2022-05-25 01:03:33', NULL, NULL, NULL, 6),
-(262, 'BLR', 'Back Light Right', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 01:03:57', '2022-05-25 01:03:57', NULL, NULL, NULL, 6),
-(263, 'BKL', 'Back Light Left', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 01:04:32', '2022-05-25 01:04:32', NULL, NULL, NULL, 6),
-(264, 'ALL', 'Brake Pad All Max Old Model', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, 'AllMax', 6, NULL, 2, '2022-05-25 01:05:09', '2022-05-25 01:05:09', NULL, NULL, NULL, 5),
-(265, 'BL', 'Belt 2200', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 01:05:38', '2022-05-25 01:05:38', NULL, NULL, NULL, 5),
-(266, 'BLL', 'Belt 22/70', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 01:06:09', '2022-05-25 01:06:09', NULL, NULL, NULL, 5),
-(267, '1133-00010', 'Fuel Filter', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 01:06:46', '2022-05-25 01:06:46', NULL, NULL, NULL, 7),
-(268, '1133-00017', 'Fuel Filter', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 01:07:16', '2022-05-25 01:07:16', NULL, NULL, NULL, 7),
-(269, 'AC', 'AC Net Filter', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-05-25 01:07:42', '2022-05-25 01:07:42', NULL, NULL, NULL, 5),
-(270, 'MK100-10040408*6', 'Piston Ring', 0, 0, 0, 6, NULL, '[null]', NULL, NULL, 'YouChai', 6, NULL, 2, '2022-05-26 13:46:00', '2022-05-26 13:55:48', NULL, NULL, NULL, 5);
+(273, '1133-00010', 'Water Separator Filter', 0, 0, 2, 4, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-08-30 14:16:08', '2022-08-30 14:16:43', NULL, NULL, NULL, 7),
+(274, '1133-00017', 'Fuel Filter', 0, 0, 0, 2, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-08-30 14:18:26', '2022-08-30 14:19:08', NULL, NULL, NULL, 7),
+(275, '2919-00054', 'Torque Rod Bush - Small', 0, 0, 0, 4, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-08-30 14:27:10', '2022-08-30 14:27:41', NULL, NULL, NULL, 5),
+(276, '2935-00215H', 'Jumper Rod Bush - Big', 0, 0, 0, 4, NULL, '[null]', NULL, NULL, NULL, 9, NULL, 2, '2022-08-30 16:27:02', '2022-08-30 16:28:21', NULL, NULL, NULL, 5),
+(277, '2935-00239H', 'Jumper Rod Bush - Small', 0, 0, 0, 17, NULL, '[null]', NULL, NULL, NULL, 9, NULL, 2, '2022-08-30 16:30:31', '2022-08-30 16:31:27', NULL, NULL, NULL, 5),
+(278, '3103-00395H', 'Rear Wheel Nut Silver New Model', 0, 0, 0, 40, NULL, '[null]', NULL, NULL, NULL, 9, NULL, 2, '2022-08-30 16:35:09', '2022-08-30 16:39:38', NULL, NULL, NULL, 5),
+(279, 'rear wheel nut black new model', 'Rear Wheel Nut Black New Model', 0, 0, 0, 8, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-08-30 17:21:12', '2022-08-30 17:22:35', NULL, NULL, NULL, 5),
+(280, '3001-01399H', 'Kingpin Bush New Model', 0, 0, 0, 4, NULL, '[null]', NULL, NULL, NULL, 9, NULL, 2, '2022-09-06 16:21:09', '2022-09-06 16:28:07', NULL, NULL, NULL, 5),
+(281, '2214-00100H', 'Cross Shaft', 0, 0, 0, 0, NULL, '[null]', NULL, NULL, NULL, 9, NULL, 2, '2022-09-06 16:33:49', '2022-09-06 16:44:02', NULL, NULL, NULL, 5),
+(282, '2201-01828h', 'Cross Shaft New Model', 0, 0, 0, 3, NULL, '[null]', NULL, NULL, NULL, 9, NULL, 2, '2022-09-06 16:50:57', '2022-09-06 16:52:22', NULL, NULL, NULL, 5),
+(283, '3001-01434', 'Kingpin New Model', 0, 0, 0, 2, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-09-06 17:05:35', '2022-09-06 17:05:59', NULL, NULL, NULL, 5),
+(284, '--', 'Front Torque Rod Bush', 0, 0, 0, 4, NULL, '[null]', NULL, NULL, NULL, 6, NULL, 2, '2022-09-06 17:07:12', '2022-09-06 17:07:31', NULL, NULL, NULL, 5);
 
 -- --------------------------------------------------------
 
@@ -763,10 +853,13 @@ CREATE TABLE `vendors` (
 --
 
 INSERT INTO `vendors` (`id`, `name`, `phone`, `address`, `email`, `profile_image`, `type`, `status`, `balance`, `opening_balance`, `created_by`, `created_at`, `updated_at`) VALUES
-(2, 'JC Autos', NULL, NULL, NULL, 'profile_image_icon.png', 'Credit', 'Active', 0, 0, 2, '2022-05-09 13:39:00', '2022-05-09 13:39:00'),
-(3, 'NAT Autos', NULL, NULL, NULL, 'profile_image_icon.png', 'Credit', 'Active', 0, 0, 2, '2022-05-09 13:39:15', '2022-05-09 13:39:15'),
-(4, 'Sardar & Sons', NULL, NULL, NULL, 'profile_image_icon.png', 'Credit', 'Active', 0, 0, 2, '2022-05-09 13:39:26', '2022-05-09 13:39:26'),
-(5, 'Arslan', NULL, NULL, 'abc@xyz.com', 'profile_image_icon.png', 'Cash', 'Active', 0, 0, 2, '2022-05-10 22:59:45', '2022-05-10 22:59:45');
+(3, 'NAT Autos', NULL, NULL, NULL, 'profile_image_icon.png', 'Credit', 'Active', 21675, 0, 2, '2022-05-09 13:39:15', '2022-08-30 17:19:32'),
+(4, 'Sardar & Sons', NULL, NULL, NULL, 'profile_image_icon.png', 'Credit', 'Active', 1075181, 0, 2, '2022-05-09 13:39:26', '2022-09-06 17:15:56'),
+(5, 'Arslan', NULL, NULL, 'abc@xyz.com', 'profile_image_icon.png', 'Credit', 'Active', -10000, 0, 2, '2022-05-10 22:59:45', '2022-07-03 22:39:23'),
+(6, 'Qasim', NULL, NULL, NULL, 'profile_image_icon.png', 'Credit', 'Active', 60000, 0, 2, '2022-06-25 15:48:39', '2022-07-03 22:08:37'),
+(9, 'Ali', NULL, NULL, NULL, 'profile_image_icon.png', 'Credit', 'Active', 0, 0, 2, '2022-07-18 10:00:22', '2022-07-18 10:03:25'),
+(10, 'Ahmed', NULL, NULL, NULL, 'profile_image_icon.png', 'Credit', 'Active', 0, 0, 2, '2022-07-20 11:57:59', '2022-08-08 14:45:29'),
+(11, 'Jamal Corporation', NULL, NULL, NULL, 'profile_image_icon.png', 'Credit', 'Active', 42000, 0, 2, '2022-08-30 14:25:43', '2022-08-30 17:22:35');
 
 --
 -- Indexes for dumped tables
@@ -838,7 +931,8 @@ ALTER TABLE `invoices`
 --
 ALTER TABLE `invoice_details`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `invoice_details_invoice_id_foreign` (`invoice_id`);
+  ADD KEY `invoice_details_invoice_id_foreign` (`invoice_id`),
+  ADD KEY `invoice_details_vendor_id_foreign` (`vendor_id`);
 
 --
 -- Indexes for table `migrations`
@@ -940,7 +1034,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `employees`
@@ -970,25 +1064,25 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `invoice_details`
 --
 ALTER TABLE `invoice_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -1000,7 +1094,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=271;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=285;
 
 --
 -- AUTO_INCREMENT for table `product_categories`
@@ -1030,7 +1124,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `vendors`
 --
 ALTER TABLE `vendors`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
@@ -1080,7 +1174,8 @@ ALTER TABLE `invoices`
 -- Constraints for table `invoice_details`
 --
 ALTER TABLE `invoice_details`
-  ADD CONSTRAINT `invoice_details_invoice_id_foreign` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `invoice_details_invoice_id_foreign` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `invoice_details_vendor_id_foreign` FOREIGN KEY (`vendor_id`) REFERENCES `vendors` (`id`);
 
 --
 -- Constraints for table `payments`
