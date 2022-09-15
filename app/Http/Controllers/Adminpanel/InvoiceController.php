@@ -336,9 +336,13 @@ class InvoiceController extends Controller
             unset($inputs['product_sale_price']);
 
             $invoice->no_of_items = $inputs['no_of_items'];
-            $invoice->no_of_items = $inputs['amount'];
-            $invoice->no_of_items = $inputs['no_of_products'];
-            $invoice->no_of_items = $inputs['customer_id'];
+            $invoice->amount = $inputs['amount'];
+            $invoice->no_of_products = $inputs['no_of_products'];
+            $invoice->customer_id = $inputs['customer_id'];
+            $invoice->cash_recieved = $inputs['cash_recieved'];
+            $invoice->description = $inputs['description'];
+            $invoice->reference_no = $inputs['reference_no'];
+            $invoice->discount = $inputs['discount'];
 
             foreach ($invoice->detail as $key => $invoiceDetail) {
                 $product = Product::find($invoiceDetail->product_id);
