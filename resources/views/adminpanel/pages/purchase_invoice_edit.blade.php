@@ -262,6 +262,7 @@
             invoice.detail.forEach(invoiceDetail => {
                 products.forEach(product => {
                     if(invoiceDetail.product_id == product.id){
+                        console.log(invoiceDetail);
                         var avgPurchasePrice = (parseInt(product.cost_price) + parseInt(invoiceDetail.purchase_price))/2;
                     $('#productTableBody').append(`<tr id="row-${counter}">
                                                     <td>${counter}</td>
@@ -269,7 +270,7 @@
                                                     <td>${invoiceDetail.purchase_price}</td>
                                                     <td>${avgPurchasePrice}</td>
                                                     <td>${invoiceDetail.sale_quantity}</td>
-                                                    <td>${invoiceDetail.total_amount}</td>
+                                                    <td>${invoiceDetail.total_ammount}</td>
                                                     <td>
                                                         <a onclick="deleteProduct(${counter})">
                                                             <small class="label label-danger"><i class="fa"></i>delete</small>
