@@ -14,7 +14,7 @@
             <h2>Create Expense</h2>
             <ol class="breadcrumb">
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="{{ route('admin.home') }}">Home</a>
                 </li>
                 <li>
                     <a>Expense</a>
@@ -86,7 +86,7 @@
 
                     </div>
 
-                    
+
                     <input type="hidden" name="account_id" id="1" value="1">
 
                     <div class="form-group">

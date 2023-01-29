@@ -14,7 +14,7 @@
             <h2>Purchase Invoice</h2>
             <ol class="breadcrumb">
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="{{ route('admin.home') }}">Home</a>
                 </li>
                 <li>
                     <a>Invoice</a>

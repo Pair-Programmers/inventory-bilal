@@ -16,7 +16,7 @@ der-bottom white-bg page-heading">
             <h2>List of Products</h2>
             <ol class="breadcrumb">
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="{{ route('admin.home') }}">Home</a>
                 </li>
                 <li>
                     <a>Products</a>

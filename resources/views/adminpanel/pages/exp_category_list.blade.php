@@ -15,7 +15,7 @@
         <h2 >List of Contact Us Messages</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="index.html">Home</a>
+                <a href="{{ route('admin.home') }}">Home</a>
             </li>
             <li>
                 <a>Contact Us Messages</a>

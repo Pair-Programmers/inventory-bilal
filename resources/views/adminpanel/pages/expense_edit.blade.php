@@ -14,7 +14,7 @@
             <h2>Edit Expense</h2>
             <ol class="breadcrumb">
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="{{ route('admin.home') }}">Home</a>
                 </li>
                 <li>
                     <a>Expense</a>
@@ -89,7 +89,7 @@
 
                     </div>
 
-                    
+
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Note</label>

@@ -15,7 +15,7 @@
         <h2 >List of Customers</h2>
         <ol class="breadcrumb">
             <li>
-                <a href="index.html">Home</a>
+                <a href="{{ route('admin.home') }}">Home</a>
             </li>
             <li>
                 <a>Customers</a>

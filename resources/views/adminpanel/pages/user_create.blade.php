@@ -34,13 +34,13 @@
     <?=$sidebar; ?>
 
         <div id="page-wrapper" class="gray-bg">
-            <?=$header; ?>            
+            <?=$header; ?>
             <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
                     <h2>Create User</h2>
                     <ol class="breadcrumb">
                         <li>
-                            <a href="index.html">Home</a>
+                            <a href="{{ route('admin.home') }}">Home</a>
                         </li>
                         <li>
                             <a>User</a>
@@ -162,7 +162,7 @@
                     </div>
                         </div>
                         <br>
-                
+
             </div>
         </div>
         <div class="footer">
