@@ -68,7 +68,7 @@
 
                             <div class="input-group">
                                 <select required data-placeholder="Choose a Country..." class="chosen-select"
-                                    tabindex="2" style="width:350px;" id="vendorSelect" name="invoice_id">
+                                    tabindex="2" style="width:350px;" id="invoiceSelect" name="invoice_id">
                                     <option selected disabled value="">Select Invoice</option>
                                     @foreach ($invoices as $invoice)
                                         <option value="{{ $invoice->id }}">{{ sprintf("%04d", $invoice->id) }}</option>
@@ -150,10 +150,10 @@
 @section('other-script')
     <script>
         $(document).ready(function() {
-            var vendors = @json($vendors);
-            $('#vendorSelect').on('change',function(e){
+            var invoices = @json($invoices);
+            $('#invoiceSelect').on('change',function(e){
                 console.log($(this).prop('selectedIndex'));
-                $('#preBalance').html(vendors[$(this).prop('selectedIndex')-1].balance);
+                $('#preBalance').html(invoices[$(this).prop('selectedIndex')-1].pre_balance);
             });
             $('#typeSelect').on('change',function(e){
                 console.log($(this).val());
