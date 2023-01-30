@@ -61,6 +61,7 @@
                                     <thead>
                                     <tr>
                                         <th>Item List</th>
+                                        <th>Model</th>
                                         <th>Quantity</th>
                                         <th>Unit Price</th>
                                         <th>Total Price</th>
@@ -73,6 +74,7 @@
                                                 <strong>{{$item->product->name}}</strong>
                                             </td>
                                             <td>{{$item->sale_quantity}}</td>
+                                            <td>{{$item->product->model->name}}</td>
                                             <td>{{$item->purchase_price}}</td>
                                             <td>{{$item->total_ammount}}</td>
                                         </tr>
