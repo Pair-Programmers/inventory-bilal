@@ -51,11 +51,11 @@
                                 </select>
                             </div>
 
-                            <label class="col-sm-2 control-label">Pre Balance</label>
+                        </div>
+                        <label class="col-sm-2 control-label">Pre Balance</label>
 
-                            <div class="col-sm-4">
-                                <label class="control-label">  <strong id="preBalance">0</strong> </label>
-                            </div>
+                        <div class="col-sm-4">
+                            <label class="control-label">  <strong id="preBalance">0</strong> </label>
                         </div>
                     </div>
                     <input type="hidden" value="In" name="group">
@@ -155,7 +155,7 @@
                 console.log($(this).prop('selectedIndex'));
                 $('#preBalance').html(customers[$(this).prop('selectedIndex')-1].balance);
             });
-            
+
             $('#typeSelect').on('change',function(e){
                 console.log($(this).val());
                 if ($(this).val() == 'Customer Payment') {
