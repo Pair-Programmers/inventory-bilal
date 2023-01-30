@@ -73,8 +73,8 @@
                                             <td>
                                                 <strong>{{$item->product->name}}</strong>
                                             </td>
-                                            <td>{{$item->sale_quantity}}</td>
                                             <td>{{$item->product->model->name}}</td>
+                                            <td>{{$item->sale_quantity}}</td>
                                             <td>{{$item->purchase_price}}</td>
                                             <td>{{$item->total_ammount}}</td>
                                         </tr>
