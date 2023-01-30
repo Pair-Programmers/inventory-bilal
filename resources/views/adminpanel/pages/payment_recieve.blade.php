@@ -151,7 +151,7 @@
         $(document).ready(function() {
             var customers = @json($customers);
 
-            $('#vendorSelect').on('change',function(e){
+            $('#customerSelect').on('change',function(e){
                 console.log($(this).prop('selectedIndex'));
                 $('#preBalance').html(customers[$(this).prop('selectedIndex')-1].balance);
             });
