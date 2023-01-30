@@ -52,7 +52,7 @@
                             </div>
                         </div>
 
-                        <label class="col-sm-2 control-label">Pre Balance</label>
+                        <label class="col-sm-2 control-label">Balance</label>
 
                         <div class="col-sm-4">
                             <label class="control-label">  <strong id="preBalance">0</strong> </label>
