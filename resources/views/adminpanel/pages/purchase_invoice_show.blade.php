@@ -98,7 +98,7 @@
                                     </tr>
                                     <tr>
                                         <td><strong>TOTAL :</strong></td>
-                                        <td>RS{{$invoice->amount}}.00</td>
+                                        <td>RS {{$invoice->amount}}.00</td>
                                     </tr>
                                 </tbody>
                             </table>
