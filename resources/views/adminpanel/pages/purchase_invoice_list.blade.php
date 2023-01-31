@@ -135,7 +135,7 @@
                     <td class="center">{{$invoice->discount}}</td>
                     <td class="center">{{$invoice->pre_balance}}</td>
                     {{-- <td class="center">{{$invoice->cash_recieved + $invoice->amount_paid}}</td> --}}
-                    <td class="center">{{$invoice->cash_recieved}}</td>
+                    <td class="center">{{$invoice->amount_paid}}</td>
                     <td class="center">{{$invoice->amount  - $invoice->amount_paid}}</td>
                     <td class="center">{{$invoice->createdBy->name}}</td>
 
