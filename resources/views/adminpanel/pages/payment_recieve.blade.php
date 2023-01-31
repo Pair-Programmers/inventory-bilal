@@ -152,7 +152,7 @@
             var invoices = @json($invoices);
             $('#invoiceSelect').on('change',function(e){
                 console.log($(this).prop('selectedIndex'));
-                $('#preBalance').html(invoices[$(this).prop('selectedIndex')-1].pre_balance);
+                $('#preBalance').html((invoices[$(this).prop('selectedIndex')-1].amount - invoices[$(this).prop('selectedIndex')-1].cash_recieved));
             });
 
             $('#typeSelect').on('change',function(e){
