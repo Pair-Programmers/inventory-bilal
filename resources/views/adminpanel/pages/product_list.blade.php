@@ -85,7 +85,11 @@ der-bottom white-bg page-heading">
                                     @endphp
 
                                     @foreach ($products as $product)
-                                        <tr class="gradeX" id="row-{{ $product->id }}">
+                                        <tr class="gradeX" id="row-{{ $product->id }}"
+                                            @if ($product->available_qty < 5)
+                                            style="color: rgb(245, 106, 106)"
+                                            @endif
+                                            >
                                             <td>{{ $counter }}</td>
                                             {{-- <td class="center">{{ sprintf('%04d', $product->id) }}</td> --}}
                                             <td class="center">{{ $product->code }}</td>
