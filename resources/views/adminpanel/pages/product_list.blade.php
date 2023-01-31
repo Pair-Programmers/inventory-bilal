@@ -87,7 +87,7 @@ der-bottom white-bg page-heading">
                                     @foreach ($products as $product)
                                         <tr class="gradeX" id="row-{{ $product->id }}"
                                             @if ($product->available_qty < 5)
-                                            style="background-color: rgb(245, 106, 106)"
+                                            style="background-color: rgb(223, 153, 153)"
                                             @endif
                                             >
                                             <td>{{ $counter }}</td>
