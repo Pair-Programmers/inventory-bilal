@@ -12,6 +12,7 @@ use App\Models\Invoice;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PaymentController extends Controller
 {
@@ -32,7 +33,10 @@ class PaymentController extends Controller
         $customers = Customer::all();
         $vendors = Vendor::all();
         $accounts = Account::all();
-        $invoices = Invoice::where('type', 'Purchase')->get();
+        $invoices = Invoice::where('type', 'Purchase')
+        ->leftJoin('payments', 'payments.invoice_id', 'invoices.id')
+        ->select('invoices.*', DB::raw('SUM(payments.amount) as amount_paid'))
+        ->groupBy('invoices.id')->get();
 
         return view('adminpanel.pages.payment_make', compact('invoices', 'employees', 'accounts', 'customers', 'vendors'));
     }
@@ -43,7 +47,10 @@ class PaymentController extends Controller
         $customers = Customer::all();
         $vendors = Vendor::all();
         $accounts = Account::all();
-        $invoices = Invoice::where('type', 'Sale')->get();
+        $invoices = Invoice::where('type', 'Sale')
+        ->leftJoin('payments', 'payments.invoice_id', 'invoices.id')
+        ->select('invoices.*', DB::raw('SUM(payments.amount) as amount_paid'))
+        ->groupBy('invoices.id')->get();
         return view('adminpanel.pages.payment_recieve', compact('invoices', 'employees', 'accounts', 'customers', 'vendors'));
     }
 
