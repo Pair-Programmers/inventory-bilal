@@ -33,7 +33,7 @@ class PaymentController extends Controller
         $customers = Customer::all();
         $vendors = Vendor::all();
         $accounts = Account::all();
-        $invoices = Invoice::where('type', 'Purchase')
+        $invoices = Invoice::where('invoices.type', 'Purchase')
         ->leftJoin('payments', 'payments.invoice_id', 'invoices.id')
         ->select('invoices.*', DB::raw('SUM(payments.amount) as amount_paid'))
         ->groupBy('invoices.id')->get();
@@ -47,7 +47,7 @@ class PaymentController extends Controller
         $customers = Customer::all();
         $vendors = Vendor::all();
         $accounts = Account::all();
-        $invoices = Invoice::where('type', 'Sale')
+        $invoices = Invoice::where('invoices.type', 'Sale')
         ->leftJoin('payments', 'payments.invoice_id', 'invoices.id')
         ->select('invoices.*', DB::raw('SUM(payments.amount) as amount_paid'))
         ->groupBy('invoices.id')->get();
