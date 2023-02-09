@@ -92,7 +92,21 @@
 
 
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">Vendor</label>
 
+                                    <div class="col-sm-4">
+                                        <div class="input-group">
+                                            <select required data-placeholder="Choose a Country..." class="chosen-select"
+                                                tabindex="2" style="width:350px;" id="vendorSelect" name="vendor_id">
+                                                @foreach ($vendors as $vendor)
+                                                    <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Product</label>
 
@@ -109,21 +123,7 @@
                                     </div>
 
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-sm-2 control-label">Vendor</label>
 
-                                    <div class="col-sm-4">
-                                        <div class="input-group">
-                                            <select required data-placeholder="Choose a Country..." class="chosen-select"
-                                                tabindex="2" style="width:350px;" id="vendorSelect" name="vendor_id">
-                                                @foreach ($vendors as $vendor)
-                                                    <option value="{{ $vendor->id }}">{{ $vendor->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                </div>
 
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">Qty</label>
