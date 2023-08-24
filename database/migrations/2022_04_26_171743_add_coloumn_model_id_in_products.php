@@ -14,7 +14,7 @@ class AddColoumnModelIdInProducts extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->bigInteger('product_model_id')->unsigned();
+            $table->bigInteger('product_model_id')->unsigned()->nullable();
             $table->foreign('product_model_id')->references('id')->on('product_models');
         });
     }
